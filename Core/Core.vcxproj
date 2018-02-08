@@ -168,6 +168,10 @@
     <ClCompile Include="dependencies\includes\glad\glad.c" />
     <ClCompile Include="src\app\GameWindow.cpp" />
     <ClCompile Include="src\dllmain.cpp" />
+    <ClCompile Include="src\Resources\Buffers\Buffer.cpp" />
+    <ClCompile Include="src\Resources\Buffers\ElementBuffer.cpp" />
+    <ClCompile Include="src\Resources\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="src\Resources\Resource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dependencies\includes\glad\glad.h" />
@@ -175,6 +179,10 @@
     <ClInclude Include="src\app\GameWindow.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="src\Common.h" />
+    <ClInclude Include="src\Resources\Buffers\Buffer.h" />
+    <ClInclude Include="src\Resources\Buffers\ElementBuffer.h" />
+    <ClInclude Include="src\Resources\Buffers\VertexBuffer.h" />
+    <ClInclude Include="src\Resources\Resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

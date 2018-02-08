@@ -1,15 +1,44 @@
 #include "GameWindow.h"
 
-namespace App
-{
+namespace App {
+
 	GameWindow::GameWindow(unsigned int width, unsigned int height, const char* title) : m_Width(width), m_Height(height), m_Title(title)
 	{
-
+		OnLoad();
 	}
 
 	GameWindow::~GameWindow()
 	{
+		glfwTerminate();
+	}
 
+	void GameWindow::Run()
+	{
+		while (!Closed())
+		{
+			PollEvents();
+
+			OnUpdateFrame();
+			OnRenderFrame();
+
+			SwapBuffers();
+		}
+	}
+
+	void GameWindow::OnLoad()
+	{
+		Initialise();
+	}
+
+	void GameWindow::OnUpdateFrame()
+	{
+		
+	}
+
+	void GameWindow::OnRenderFrame()
+	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
 	}
 
 	bool GameWindow::Initialise()
@@ -53,4 +82,13 @@ namespace App
 	{
 		glfwSwapBuffers(m_Window);
 	}
+
+	void GameWindow::SetClearColor(float r, float g, float b, float a)
+	{
+		m_ClearColor[0] = r;
+		m_ClearColor[1] = g;
+		m_ClearColor[2] = b;
+		m_ClearColor[3] = a;
+	}
+
 }

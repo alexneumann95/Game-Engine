@@ -7,21 +7,29 @@
 
 namespace App {
 
-	class API GameWindow final
+	class API GameWindow
 	{
 	public:
 		GameWindow(unsigned int width, unsigned int height, const char* title);
 		~GameWindow();
 
+		void Run();
+	protected:
+		virtual void OnLoad();
+		virtual void OnUpdateFrame();
+		virtual void OnRenderFrame();
+	protected:
 		bool Initialise();
 		bool Closed();
 		void PollEvents();
 		void SwapBuffers();
+		void SetClearColor(float r, float g, float b, float a);
 	private:
 		unsigned int m_Width = 800;
 		unsigned int m_Height = 600;
 		const char* m_Title = "Game Window";
 		GLFWwindow* m_Window = nullptr;
+		float m_ClearColor[4] = { 0.2f, 0.7f, 0.8f, 1.0f };
 	};
 
 }
