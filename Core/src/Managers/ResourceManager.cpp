@@ -25,9 +25,11 @@ namespace Managers {
 	{
 		for (auto& buffer : m_VertexBuffers)
 			delete buffer.second;
+		m_VertexBuffers.clear();
 
 		for (auto& buffer : m_ElementBuffers)
 			delete buffer.second;
+		m_ElementBuffers.clear();
 
 		return true;
 	}
@@ -59,6 +61,42 @@ namespace Managers {
 	bool ResourceManager::CheckElementBufferExists(const string& RUID)
 	{
 		return m_ElementBuffers.find(RUID) != m_ElementBuffers.end() ? true : false;
+	}
+
+	VertexBuffer* const ResourceManager::GetVertexBuffer(const string& RUID)
+	{
+		auto iter = m_VertexBuffers.find(RUID);
+		return iter != m_VertexBuffers.end() ? iter->second : nullptr;
+	}
+
+	ElementBuffer* const ResourceManager::GetElementBuffer(const string& RUID)
+	{
+		auto iter = m_ElementBuffers.find(RUID);
+		return iter != m_ElementBuffers.end() ? iter->second : nullptr;
+	}
+
+	bool ResourceManager::DestroyVertexBuffer(const string& RUID)
+	{
+		if (!CheckVertexBufferExists(RUID))
+			return false;
+
+		auto iter = m_VertexBuffers.find(RUID);
+		delete iter->second;
+		m_VertexBuffers.erase(iter);
+
+		return true;
+	}
+
+	bool ResourceManager::DestroyElementBuffer(const string& RUID)
+	{
+		if (!CheckElementBufferExists(RUID))
+			return false;
+
+		auto iter = m_ElementBuffers.find(RUID);
+		delete iter->second;
+		m_ElementBuffers.erase(iter);
+
+		return true;
 	}
 
 	// RUID

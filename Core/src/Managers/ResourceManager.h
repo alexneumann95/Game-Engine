@@ -27,6 +27,12 @@ namespace Managers {
 
 		bool CheckVertexBufferExists(const string& RUID);
 		bool CheckElementBufferExists(const string& RUID);
+
+		VertexBuffer* const GetVertexBuffer(const string& RUID);
+		ElementBuffer* const GetElementBuffer(const string& RUID);
+
+		bool DestroyVertexBuffer(const string& RUID);
+		bool DestroyElementBuffer(const string& RUID);
 	private:
 		static ResourceManager* m_pInstance;
 
