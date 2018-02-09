@@ -2,12 +2,12 @@
 
 namespace Resources {
 
-	Resource::Resource(const char* const RUID) : m_RUID(RUID)
+	Resource::Resource(const string& RUID) : m_RUID(RUID)
 	{
 
 	}
 
-	const char* const Resource::GetRUID() const
+	const string& Resource::GetRUID() const
 	{
 		return m_RUID;
 	}

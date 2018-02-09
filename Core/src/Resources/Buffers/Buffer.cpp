@@ -2,7 +2,7 @@
 
 namespace Resources { namespace Buffers {
 
-	Buffer::Buffer(unsigned int bufferSize, const char* const RUID) : Resource(RUID), m_Size(bufferSize)
+	Buffer::Buffer(unsigned int bufferSize, const string& RUID) : Resource(RUID), m_Size(bufferSize)
 	{
 
 	}

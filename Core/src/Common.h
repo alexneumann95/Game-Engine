@@ -1,8 +1,10 @@
 #pragma once
+#pragma warning (disable: 4251)
 
 #include "API.h"
 
 #include <iostream>
+#include <assert.h>
 
 #define LogError(msg)																								\
 {																													\

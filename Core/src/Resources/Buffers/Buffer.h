@@ -6,10 +6,10 @@
 
 namespace Resources { namespace Buffers {
 
-	class API Buffer : public Resource
+	class GE_API Buffer : public Resource
 	{
 	public:
-		Buffer(unsigned int bufferSize, const char* const RUID);
+		Buffer(unsigned int bufferSize, const string& RUID);
 		~Buffer();
 
 		virtual void LoadData(unsigned int offset, unsigned int size, const void* data) = 0;

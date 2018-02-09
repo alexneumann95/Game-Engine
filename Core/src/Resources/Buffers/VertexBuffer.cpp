@@ -2,7 +2,7 @@
 
 namespace Resources { namespace Buffers {
 
-	VertexBuffer::VertexBuffer(unsigned int bufferSize, const char* const RUID) : Buffer(bufferSize, RUID)
+	VertexBuffer::VertexBuffer(unsigned int bufferSize, const string& RUID) : Buffer(bufferSize, RUID)
 	{
 
 	}

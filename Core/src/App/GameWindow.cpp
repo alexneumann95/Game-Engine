@@ -1,4 +1,5 @@
 #include "GameWindow.h"
+#include "..\EngineControl.h"
 
 namespace App {
 
@@ -32,7 +33,7 @@ namespace App {
 
 	void GameWindow::OnUpdateFrame()
 	{
-		
+		Managers::ResourceManager::Instance()->Update();
 	}
 
 	void GameWindow::OnRenderFrame()

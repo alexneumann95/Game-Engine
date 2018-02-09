@@ -4,10 +4,10 @@
 
 namespace Resources { namespace Buffers {
 
-	class API VertexBuffer final : public Buffer
+	class GE_API VertexBuffer final : public Buffer
 	{
 	public:
-		VertexBuffer(unsigned int bufferSize, const char* const RUID);
+		VertexBuffer(unsigned int bufferSize, const string& RUID);
 		~VertexBuffer();
 
 		void Init() override;

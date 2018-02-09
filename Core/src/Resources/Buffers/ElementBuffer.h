@@ -4,10 +4,10 @@
 
 namespace Resources { namespace Buffers {
 
-	class API ElementBuffer final : public Buffer
+	class GE_API ElementBuffer final : public Buffer
 	{
 	public:
-		ElementBuffer(unsigned int bufferSize, const char* const RUID);
+		ElementBuffer(unsigned int bufferSize, const string& RUID);
 		~ElementBuffer();
 
 		void Init() override;

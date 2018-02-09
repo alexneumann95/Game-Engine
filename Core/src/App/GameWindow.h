@@ -7,7 +7,7 @@
 
 namespace App {
 
-	class API GameWindow
+	class GE_API GameWindow
 	{
 	public:
 		GameWindow(unsigned int width, unsigned int height, const char* title);

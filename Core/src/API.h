@@ -1,5 +1,5 @@
-#ifdef GE_API
-#define API _declspec(dllexport)
+#ifdef CORE_EXPORTS
+#define GE_API _declspec(dllexport)
 #else
-#define API _declspec(dllimport)
+#define GE_API _declspec(dllimport)
 #endif

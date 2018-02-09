@@ -2,18 +2,21 @@
 
 #include "..\Common.h"
 
+#include <string>
+using std::string;
+
 namespace Resources {
 
-	class API Resource
+	class GE_API Resource
 	{
 	public:
-		Resource(const char* const RUID);
+		Resource(const string& RUID);
 
-		const char* const GetRUID() const;
+		const string& GetRUID() const;
 
 		virtual void Init() = 0;
 	private:
-		const char* const m_RUID = "NULL";
+		const string m_RUID = "NULL";
 	};
 
 }

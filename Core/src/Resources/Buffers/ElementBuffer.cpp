@@ -2,7 +2,7 @@
 
 namespace Resources { namespace Buffers {
 
-	ElementBuffer::ElementBuffer(unsigned int bufferSize, const char* const RUID) : Buffer(bufferSize, RUID)
+	ElementBuffer::ElementBuffer(unsigned int bufferSize, const string& RUID) : Buffer(bufferSize, RUID)
 	{
 
 	}
@@ -17,7 +17,7 @@ namespace Resources { namespace Buffers {
 		CreateBuffer();
 	}
 
-	void ElementBuffer::LoadData(unsigned int offset, unsigned int size, const void* data)
+	void ElementBuffer::LoadData(unsigned int offset, unsigned int size, const void* data) 
 	{
 		if ((offset + size) > GetBufferSize())
 		{
