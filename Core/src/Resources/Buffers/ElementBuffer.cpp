@@ -2,7 +2,7 @@
 
 namespace Resources { namespace Buffers {
 
-	ElementBuffer::ElementBuffer(unsigned int bufferSize, const string& RUID) : Buffer(bufferSize, RUID)
+	ElementBuffer::ElementBuffer(unsigned int count, const std::string& RUID) : Buffer(count * sizeof(ELEMENT_BUFFER_DATA_TYPE), RUID)
 	{
 
 	}
@@ -17,15 +17,18 @@ namespace Resources { namespace Buffers {
 		CreateBuffer();
 	}
 
-	void ElementBuffer::LoadData(unsigned int offset, unsigned int size, const void* data) 
+	void ElementBuffer::LoadData(unsigned int offsetCount, unsigned int count, const void* pData)
 	{
+		unsigned int offset = offsetCount * sizeof(ELEMENT_BUFFER_DATA_TYPE);
+		unsigned int size = count * sizeof(ELEMENT_BUFFER_DATA_TYPE);
+
 		if ((offset + size) > GetBufferSize())
 		{
 			LogError("Could not load data into the element buffer!");
 			return;
 		}
 
-		glNamedBufferSubData(GetBufferObject(), offset, size, data);
+		glNamedBufferSubData(GetBufferObject(), offset, size, pData);
 	}
 
 	void ElementBuffer::BindEBO()

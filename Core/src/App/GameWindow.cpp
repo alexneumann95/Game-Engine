@@ -3,7 +3,7 @@
 
 namespace App {
 
-	GameWindow::GameWindow(unsigned int width, unsigned int height, const char* title) : m_Width(width), m_Height(height), m_Title(title)
+	GameWindow::GameWindow(unsigned int width, unsigned int height, const std::string& title) : m_Width(width), m_Height(height), m_Title(title)
 	{
 		OnLoad();
 	}
@@ -33,7 +33,7 @@ namespace App {
 
 	void GameWindow::OnUpdateFrame()
 	{
-		Managers::ResourceManager::Instance()->Update();
+		EngineControl::EngineUpdate();
 	}
 
 	void GameWindow::OnRenderFrame()
@@ -49,7 +49,7 @@ namespace App {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-		m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, nullptr, nullptr);
+		m_Window = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), nullptr, nullptr);
 		if (m_Window == NULL)
 		{
 			LogError("Failed to create GLFW window!");

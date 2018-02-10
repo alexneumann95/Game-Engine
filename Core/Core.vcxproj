@@ -168,10 +168,14 @@
     <ClCompile Include="dependencies\includes\glad\glad.c" />
     <ClCompile Include="src\app\GameWindow.cpp" />
     <ClCompile Include="src\dllmain.cpp" />
+    <ClCompile Include="src\Managers\FileManager.cpp" />
     <ClCompile Include="src\Managers\ResourceManager.cpp" />
+    <ClCompile Include="src\Maths\vec3.cpp" />
+    <ClCompile Include="src\Maths\vec4.cpp" />
     <ClCompile Include="src\Resources\Buffers\Buffer.cpp" />
     <ClCompile Include="src\Resources\Buffers\ElementBuffer.cpp" />
     <ClCompile Include="src\Resources\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="src\Resources\Model.cpp" />
     <ClCompile Include="src\Resources\Resource.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -181,11 +185,16 @@
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="src\Common.h" />
     <ClInclude Include="src\EngineControl.h" />
+    <ClInclude Include="src\Graphics\Vertex.h" />
+    <ClInclude Include="src\Managers\FileManager.h" />
     <ClInclude Include="src\Managers\Manager.h" />
     <ClInclude Include="src\Managers\ResourceManager.h" />
+    <ClInclude Include="src\Maths\vec3.h" />
+    <ClInclude Include="src\Maths\vec4.h" />
     <ClInclude Include="src\Resources\Buffers\Buffer.h" />
     <ClInclude Include="src\Resources\Buffers\ElementBuffer.h" />
     <ClInclude Include="src\Resources\Buffers\VertexBuffer.h" />
+    <ClInclude Include="src\Resources\Model.h" />
     <ClInclude Include="src\Resources\Resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

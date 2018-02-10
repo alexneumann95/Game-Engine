@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Managers\ResourceManager.h"
+#include "Managers\FileManager.h"
 
 #include <vector>
 
@@ -10,6 +11,7 @@ namespace EngineControl
 
 	bool EngineStartUp()
 	{
+		Managers.push_back(new Managers::FileManager());
 		Managers.push_back(new Managers::ResourceManager());
 
 		std::vector<Managers::Manager*>::iterator iter = Managers.begin();
@@ -34,6 +36,13 @@ namespace EngineControl
 		}
 
 		return true;
+	}
+
+	void EngineUpdate()
+	{
+		std::vector<Managers::Manager*>::iterator iter = Managers.begin();
+		for (; iter != Managers.end(); ++iter)
+			(*iter)->Update();
 	}
 }
 

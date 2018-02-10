@@ -2,7 +2,7 @@
 
 namespace Resources { namespace Buffers {
 
-	Buffer::Buffer(unsigned int bufferSize, const string& RUID) : Resource(RUID), m_Size(bufferSize)
+	Buffer::Buffer(unsigned int bufferSize, const std::string& RUID) : Resource(RUID), m_Size(bufferSize)
 	{
 
 	}

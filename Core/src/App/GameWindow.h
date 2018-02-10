@@ -10,7 +10,7 @@ namespace App {
 	class GE_API GameWindow
 	{
 	public:
-		GameWindow(unsigned int width, unsigned int height, const char* title);
+		GameWindow(unsigned int width, unsigned int height, const std::string& title);
 		~GameWindow();
 
 		void Run();
@@ -27,7 +27,7 @@ namespace App {
 	private:
 		unsigned int m_Width = 800;
 		unsigned int m_Height = 600;
-		const char* m_Title = "Game Window";
+		std::string m_Title = "Game Window";
 		GLFWwindow* m_Window = nullptr;
 		float m_ClearColor[4] = { 0.2f, 0.7f, 0.8f, 1.0f };
 	};

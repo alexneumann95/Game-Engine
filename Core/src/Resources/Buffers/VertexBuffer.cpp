@@ -2,7 +2,7 @@
 
 namespace Resources { namespace Buffers {
 
-	VertexBuffer::VertexBuffer(unsigned int bufferSize, const string& RUID) : Buffer(bufferSize, RUID)
+	VertexBuffer::VertexBuffer(unsigned int bufferSize, const std::string& RUID) : Buffer(bufferSize, RUID)
 	{
 
 	}
@@ -18,7 +18,7 @@ namespace Resources { namespace Buffers {
 		SetupVAO();
 	}
 
-	void VertexBuffer::LoadData(unsigned int offset, unsigned int size, const void* data)
+	void VertexBuffer::LoadData(unsigned int offset, unsigned int size, const void* pData)
 	{
 		if ((offset + size) > GetBufferSize())
 		{
@@ -26,7 +26,7 @@ namespace Resources { namespace Buffers {
 			return;
 		}
 
-		glNamedBufferSubData(GetBufferObject(), offset, size, data);
+		glNamedBufferSubData(GetBufferObject(), offset, size, pData);
 	}
 
 	void VertexBuffer::BindVAO()

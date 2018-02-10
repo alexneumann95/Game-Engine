@@ -23,13 +23,17 @@ namespace Managers {
 
 	bool ResourceManager::Stop()
 	{
-		for (auto& buffer : m_VertexBuffers)
-			delete buffer.second;
+		for (auto iter : m_VertexBuffers)
+			delete iter.second;
 		m_VertexBuffers.clear();
 
-		for (auto& buffer : m_ElementBuffers)
-			delete buffer.second;
+		for (auto iter : m_ElementBuffers)
+			delete iter.second;
 		m_ElementBuffers.clear();
+
+		for (auto iter : m_Models)
+			delete iter.second;
+		m_Models.clear();
 
 		return true;
 	}
@@ -39,43 +43,67 @@ namespace Managers {
 		
 	}
 
-	const string& ResourceManager::AddVertexBuffer(unsigned int bufferSize)
+	const std::string& ResourceManager::AddVertexBuffer(unsigned int bufferSize)
 	{
-		string RUID = RUID::NextVertexBufferRUID();
-		std::pair<VertexBufferMap::iterator, bool> result = m_VertexBuffers.insert(std::pair<string, VertexBuffer*>(RUID, new VertexBuffer(bufferSize, RUID)));
+		std::string RUID = RUID::NextVertexBufferRUID();
+		std::pair<VertexBufferMap::iterator, bool> result = m_VertexBuffers.insert(std::pair<std::string, VertexBuffer*>(RUID, new VertexBuffer(bufferSize, RUID)));
+		result.first->second->Init();
 		return result.first->first;
 	}
 
-	const string& ResourceManager::AddElementBuffer(unsigned int bufferSize)
+	const std::string& ResourceManager::AddElementBuffer(unsigned int count)
 	{
-		string RUID = RUID::NextElementBufferRUID();
-		std::pair<ElementBufferMap::iterator, bool> result = m_ElementBuffers.insert(std::pair<string, ElementBuffer*>(RUID, new ElementBuffer(bufferSize, RUID)));
+		std::string RUID = RUID::NextElementBufferRUID();
+		std::pair<ElementBufferMap::iterator, bool> result = m_ElementBuffers.insert(std::pair<std::string, ElementBuffer*>(RUID, new ElementBuffer(count, RUID)));
+		result.first->second->Init();
 		return result.first->first;
 	}
 
-	bool ResourceManager::CheckVertexBufferExists(const string& RUID)
+	const std::string& ResourceManager::AddModel(const std::string& file)
+	{
+		std::string RUID = RUID::GenModelRUID(file);
+		if (CheckModelExists(RUID))
+			return m_Models.find(RUID)->first;
+
+		std::pair<ModelMap::iterator, bool> result = m_Models.insert(std::pair<std::string, Model*>(RUID, new Model(file, RUID)));
+		result.first->second->Init();
+		return result.first->first;
+	}
+
+	bool ResourceManager::CheckVertexBufferExists(const std::string& RUID)
 	{
 		return m_VertexBuffers.find(RUID) != m_VertexBuffers.end() ? true : false;
 	}
 
-	bool ResourceManager::CheckElementBufferExists(const string& RUID)
+	bool ResourceManager::CheckElementBufferExists(const std::string& RUID)
 	{
 		return m_ElementBuffers.find(RUID) != m_ElementBuffers.end() ? true : false;
 	}
 
-	VertexBuffer* const ResourceManager::GetVertexBuffer(const string& RUID)
+	bool ResourceManager::CheckModelExists(const std::string& RUID)
+	{
+		return m_Models.find(RUID) != m_Models.end() ? true : false;
+	}
+
+	VertexBuffer* const ResourceManager::GetVertexBuffer(const std::string& RUID)
 	{
 		auto iter = m_VertexBuffers.find(RUID);
 		return iter != m_VertexBuffers.end() ? iter->second : nullptr;
 	}
 
-	ElementBuffer* const ResourceManager::GetElementBuffer(const string& RUID)
+	ElementBuffer* const ResourceManager::GetElementBuffer(const std::string& RUID)
 	{
 		auto iter = m_ElementBuffers.find(RUID);
 		return iter != m_ElementBuffers.end() ? iter->second : nullptr;
 	}
 
-	bool ResourceManager::DestroyVertexBuffer(const string& RUID)
+	Model* const ResourceManager::GetModel(const std::string& RUID)
+	{
+		auto iter = m_Models.find(RUID);
+		return iter != m_Models.end() ? iter->second : nullptr;
+	}
+
+	bool ResourceManager::DestroyVertexBuffer(const std::string& RUID)
 	{
 		if (!CheckVertexBufferExists(RUID))
 			return false;
@@ -87,7 +115,7 @@ namespace Managers {
 		return true;
 	}
 
-	bool ResourceManager::DestroyElementBuffer(const string& RUID)
+	bool ResourceManager::DestroyElementBuffer(const std::string& RUID)
 	{
 		if (!CheckElementBufferExists(RUID))
 			return false;
@@ -99,17 +127,34 @@ namespace Managers {
 		return true;
 	}
 
+	bool ResourceManager::DestroyModel(const std::string& RUID)
+	{
+		if (!CheckModelExists(RUID))
+			return false;
+
+		auto iter = m_Models.find(RUID);
+		delete iter->second;
+		m_Models.erase(iter);
+
+		return true;
+	}
+
 	// RUID
 	int RUID::m_NextVertexBufferNo = 1;
 	int RUID::m_NextElementBufferNo = 1;
 
-	string RUID::NextVertexBufferRUID()
+	std::string RUID::NextVertexBufferRUID()
 	{
 		return "Resources.Buffers.Vertex." + m_NextVertexBufferNo++;
 	}
 
-	string RUID::NextElementBufferRUID()
+	std::string RUID::NextElementBufferRUID()
 	{
 		return "Resources.Buffers.Element." + m_NextElementBufferNo++;
+	}
+
+	std::string RUID::GenModelRUID(const std::string& file)
+	{
+		return "Resources.Models." + file.substr(0, file.find_last_of('.'));
 	}
 }
