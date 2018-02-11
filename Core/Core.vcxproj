@@ -168,8 +168,12 @@
     <ClCompile Include="dependencies\includes\glad\glad.c" />
     <ClCompile Include="src\app\GameWindow.cpp" />
     <ClCompile Include="src\dllmain.cpp" />
+    <ClCompile Include="src\Graphics\Shader.cpp" />
+    <ClCompile Include="src\Managers\EntityManager.cpp" />
     <ClCompile Include="src\Managers\FileManager.cpp" />
+    <ClCompile Include="src\Managers\RenderManager.cpp" />
     <ClCompile Include="src\Managers\ResourceManager.cpp" />
+    <ClCompile Include="src\Managers\ShaderManager.cpp" />
     <ClCompile Include="src\Maths\vec3.cpp" />
     <ClCompile Include="src\Maths\vec4.cpp" />
     <ClCompile Include="src\Resources\Buffers\Buffer.cpp" />
@@ -185,10 +189,14 @@
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="src\Common.h" />
     <ClInclude Include="src\EngineControl.h" />
+    <ClInclude Include="src\Graphics\Shader.h" />
     <ClInclude Include="src\Graphics\Vertex.h" />
+    <ClInclude Include="src\Managers\EntityManager.h" />
     <ClInclude Include="src\Managers\FileManager.h" />
     <ClInclude Include="src\Managers\Manager.h" />
+    <ClInclude Include="src\Managers\RenderManager.h" />
     <ClInclude Include="src\Managers\ResourceManager.h" />
+    <ClInclude Include="src\Managers\ShaderManager.h" />
     <ClInclude Include="src\Maths\vec3.h" />
     <ClInclude Include="src\Maths\vec4.h" />
     <ClInclude Include="src\Resources\Buffers\Buffer.h" />

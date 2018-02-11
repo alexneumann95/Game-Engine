@@ -11,6 +11,7 @@ namespace App {
 	GameWindow::~GameWindow()
 	{
 		glfwTerminate();
+		EngineControl::EngineShutDown();
 	}
 
 	void GameWindow::Run()
@@ -29,6 +30,7 @@ namespace App {
 	void GameWindow::OnLoad()
 	{
 		Initialise();
+		EngineControl::EngineStartUp();
 	}
 
 	void GameWindow::OnUpdateFrame()

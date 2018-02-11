@@ -8,5 +8,6 @@
 #include "src\Maths\vec3.h"
 
 #include "src\Graphics\Vertex.h"
+#include "src\Graphics\Shader.h"
 
 #include "src\Resources\Model.h"

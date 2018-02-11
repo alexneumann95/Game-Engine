@@ -1,7 +1,10 @@
 #pragma once
 
-#include "Managers\ResourceManager.h"
 #include "Managers\FileManager.h"
+#include "Managers\ResourceManager.h"
+#include "Managers\EntityManager.h"
+#include "Managers\ShaderManager.h"
+#include "Managers\RenderManager.h"
 
 #include <vector>
 
@@ -13,6 +16,9 @@ namespace EngineControl
 	{
 		Managers.push_back(new Managers::FileManager());
 		Managers.push_back(new Managers::ResourceManager());
+		Managers.push_back(new Managers::EntityManager());
+		Managers.push_back(new Managers::ShaderManager());
+		Managers.push_back(new Managers::RenderManager());
 
 		std::vector<Managers::Manager*>::iterator iter = Managers.begin();
 		for (; iter != Managers.end(); ++iter)
