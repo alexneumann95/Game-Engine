@@ -64,7 +64,7 @@ namespace Graphics {
 
 	void Shader::GetShaderSource(const std::string& file, std::string& source)
 	{
-		std::ifstream f(Managers::FileManager::Instance()->GetExeDirectory() + "shaders\\" + file);
+		std::ifstream f(FILE_MANAGER->GetExeDirectory() + "shaders\\" + file);
 		if (f.fail())
 			return;
 

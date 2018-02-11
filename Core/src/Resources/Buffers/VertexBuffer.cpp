@@ -46,8 +46,10 @@ namespace Resources { namespace Buffers {
 		BindVAO();
 		BindVBO();
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, false, 3 * 4, 0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, false, 7 * sizeof(float), 0);
+		glVertexAttribPointer(1, 4, GL_FLOAT, false, 7 * sizeof(float), (const void*)(3 * sizeof(float)));
 		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
 	}
 
 } }

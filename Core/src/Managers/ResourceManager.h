@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Manager.h"
+#include "RUID.h"
 #include "..\Resources\Buffers\VertexBuffer.h"
 #include "..\Resources\Buffers\ElementBuffer.h"
 #include "..\Resources\Model.h"
@@ -48,15 +49,6 @@ namespace Managers {
 		ModelMap m_Models;
 	};
 
-	class RUID final
-	{
-	public:
-		static std::string NextVertexBufferRUID();
-		static std::string NextElementBufferRUID();
-		static std::string GenModelRUID(const std::string& file);
-	private:
-		static int m_NextVertexBufferNo;
-		static int m_NextElementBufferNo;
-	};
-
 }
+
+#define RESOURCE_MANAGER Managers::ResourceManager::Instance()

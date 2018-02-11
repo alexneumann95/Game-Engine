@@ -2,7 +2,6 @@
 
 namespace Managers {
 
-	// RESOURCE MANAGER
 	ResourceManager* ResourceManager::m_pInstance = nullptr;
 
 	ResourceManager::ResourceManager()
@@ -45,15 +44,16 @@ namespace Managers {
 
 	const std::string& ResourceManager::AddVertexBuffer(unsigned int bufferSize)
 	{
-		std::string RUID = RUID::NextVertexBufferRUID();
+		std::string RUID = NextVertexBufferRUID();
 		std::pair<VertexBufferMap::iterator, bool> result = m_VertexBuffers.insert(std::pair<std::string, VertexBuffer*>(RUID, new VertexBuffer(bufferSize, RUID)));
 		result.first->second->Init();
+
 		return result.first->first;
 	}
 
 	const std::string& ResourceManager::AddElementBuffer(unsigned int count)
 	{
-		std::string RUID = RUID::NextElementBufferRUID();
+		std::string RUID = NextElementBufferRUID();
 		std::pair<ElementBufferMap::iterator, bool> result = m_ElementBuffers.insert(std::pair<std::string, ElementBuffer*>(RUID, new ElementBuffer(count, RUID)));
 		result.first->second->Init();
 		return result.first->first;
@@ -61,7 +61,7 @@ namespace Managers {
 
 	const std::string& ResourceManager::AddModel(const std::string& file)
 	{
-		std::string RUID = RUID::GenModelRUID(file);
+		std::string RUID = GenModelRUID(file);
 		if (CheckModelExists(RUID))
 			return m_Models.find(RUID)->first;
 
@@ -139,22 +139,4 @@ namespace Managers {
 		return true;
 	}
 
-	// RUID
-	int RUID::m_NextVertexBufferNo = 1;
-	int RUID::m_NextElementBufferNo = 1;
-
-	std::string RUID::NextVertexBufferRUID()
-	{
-		return "Resources.Buffers.Vertex." + m_NextVertexBufferNo++;
-	}
-
-	std::string RUID::NextElementBufferRUID()
-	{
-		return "Resources.Buffers.Element." + m_NextElementBufferNo++;
-	}
-
-	std::string RUID::GenModelRUID(const std::string& file)
-	{
-		return "Resources.Models." + file.substr(0, file.find_last_of('.'));
-	}
 }

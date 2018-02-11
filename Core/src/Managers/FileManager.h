@@ -23,3 +23,5 @@ namespace Managers {
 	};
 
 }
+
+#define FILE_MANAGER Managers::FileManager::Instance()

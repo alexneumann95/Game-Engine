@@ -2,6 +2,8 @@
 
 #include "Manager.h"
 
+#include <glad\glad.h>
+
 namespace Managers {
 
 	class GE_API RenderManager final : public Manager
@@ -13,8 +15,12 @@ namespace Managers {
 		bool Start() override;
 		bool Stop() override;
 		void Update() override;
+
+		void Draw();
 	private:
 		static RenderManager* m_pInstance;
 	};
 
 }
+
+#define RENDER_MANAGER Managers::RenderManager::Instance()

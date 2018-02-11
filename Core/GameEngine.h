@@ -11,3 +11,5 @@
 #include "src\Graphics\Shader.h"
 
 #include "src\Resources\Model.h"
+
+#include "src\Entities\GameObject.h"

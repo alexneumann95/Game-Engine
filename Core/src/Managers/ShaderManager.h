@@ -22,3 +22,5 @@ namespace Managers {
 	};
 
 }
+
+#define SHADER_MANAGER Managers::ShaderManager::Instance()

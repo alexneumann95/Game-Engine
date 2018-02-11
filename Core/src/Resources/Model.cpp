@@ -40,7 +40,7 @@ namespace Resources {
 
 	void Model::LoadModelData()
 	{
-		std::ifstream file(Managers::FileManager::Instance()->GetExeDirectory() + "models\\" + m_File);
+		std::ifstream file(FILE_MANAGER->GetExeDirectory() + "models\\" + m_File);
 		if (file.fail())
 		{
 			LogError("Failed to open model data file: " + m_File);
