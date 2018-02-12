@@ -12,38 +12,38 @@ namespace Maths {
 
 	}
 
-	vec3& vec3::Add(const vec3& rhs)
+	vec3& vec3::Add(const vec3& other)
 	{
-		X += rhs.X;
-		Y += rhs.Y;
-		Z += rhs.Z;
+		X += other.X;
+		Y += other.Y;
+		Z += other.Z;
 
 		return *this;
 	}
 
-	vec3& vec3::Subtract(const vec3& rhs)
+	vec3& vec3::Subtract(const vec3& other)
 	{
-		X -= rhs.X;
-		Y -= rhs.Y;
-		Z -= rhs.Z;
+		X -= other.X;
+		Y -= other.Y;
+		Z -= other.Z;
 
 		return *this;
 	}
 
-	vec3& vec3::Multiply(const vec3& rhs)
+	vec3& vec3::Multiply(const vec3& other)
 	{
-		X *= rhs.X;
-		Y *= rhs.Y;
-		Z *= rhs.Z;
+		X *= other.X;
+		Y *= other.Y;
+		Z *= other.Z;
 
 		return *this;
 	}
 
-	vec3& vec3::Divide(const vec3& rhs)
+	vec3& vec3::Divide(const vec3& other)
 	{
-		X /= rhs.X;
-		Y /= rhs.Y;
-		Z /= rhs.Z;
+		X /= other.X;
+		Y /= other.Y;
+		Z /= other.Z;
 
 		return *this;
 	}
@@ -68,14 +68,14 @@ namespace Maths {
 		return lhs.Divide(rhs);
 	}
 
-	bool vec3::operator == (const vec3& rhs)
+	bool vec3::operator == (const vec3& other)
 	{
-		return (X == rhs.X && Y == rhs.Y && Z == rhs.Z);
+		return (X == other.X && Y == other.Y && Z == other.Z);
 	}
 
-	bool vec3::operator != (const vec3& rhs)
+	bool vec3::operator != (const vec3& other)
 	{
-		return !(*this == rhs);
+		return !(*this == other);
 	}
 
 	vec3& vec3::operator += (const vec3& rhs)
@@ -96,6 +96,31 @@ namespace Maths {
 	vec3& vec3::operator /= (const vec3& rhs)
 	{
 		return Divide(rhs);
+	}
+
+	vec3 vec3::Cross(const vec3& lhs, const vec3& rhs)
+	{
+		vec3 result;
+		result.X = lhs.Y * rhs.Z - lhs.Z * rhs.Y;
+		result.Y = lhs.Z * rhs.X - lhs.X * rhs.Z;
+		result.Z = lhs.X * rhs.Y - lhs.Y * rhs.X;
+		return result;
+	}
+
+	float vec3::Dot(const vec3& lhs, const vec3& rhs)
+	{
+		return lhs.X * rhs.X + lhs.Y * rhs.Y + lhs.Z * rhs.Z;
+	}
+
+	float vec3::Magnitude() const
+	{
+		return sqrt(X * X + Y * Y + Z * Z);
+	}
+
+	vec3 vec3::Normalise() const
+	{
+		float length = Magnitude();
+		return vec3(X / length, Y / length, Z / length);
 	}
 
 }

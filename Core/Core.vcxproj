@@ -181,6 +181,7 @@
     <ClCompile Include="src\Managers\ResourceManager.cpp" />
     <ClCompile Include="src\Managers\RUID.cpp" />
     <ClCompile Include="src\Managers\ShaderManager.cpp" />
+    <ClCompile Include="src\Maths\mat4.cpp" />
     <ClCompile Include="src\Maths\vec3.cpp" />
     <ClCompile Include="src\Maths\vec4.cpp" />
     <ClCompile Include="src\Resources\Buffers\Buffer.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="src\Managers\ResourceManager.h" />
     <ClInclude Include="src\Managers\RUID.h" />
     <ClInclude Include="src\Managers\ShaderManager.h" />
+    <ClInclude Include="src\Maths\mat4.h" />
     <ClInclude Include="src\Maths\vec3.h" />
     <ClInclude Include="src\Maths\vec4.h" />
     <ClInclude Include="src\Resources\Buffers\Buffer.h" />
