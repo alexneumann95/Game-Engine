@@ -1,6 +1,7 @@
 #pragma once
 
 #include "..\Common.h"
+#include "..\Maths\mat4.h"
 
 #include <glad\glad.h>
 #include <vector>
@@ -28,6 +29,8 @@ namespace Graphics {
 
 		void Use() const;
 		unsigned int Get() const;
+
+		void SetUniform(const std::string& name, const Maths::mat4& matrix);
 	private:
 		void CreateShaderProgram();
 		void GetShaderSource(const std::string& file, std::string& source);

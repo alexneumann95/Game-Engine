@@ -3,8 +3,13 @@
 
 namespace App {
 
+	GameWindow* GameWindow::m_pInstance = nullptr;
+
 	GameWindow::GameWindow(unsigned int width, unsigned int height, const std::string& title) : m_Width(width), m_Height(height), m_Title(title)
 	{
+		assert(m_pInstance == nullptr);
+		m_pInstance = this;
+
 		OnLoad();
 	}
 
@@ -12,6 +17,11 @@ namespace App {
 	{
 		glfwTerminate();
 		EngineControl::EngineShutDown();
+	}
+
+	GameWindow* GameWindow::Instance()
+	{
+		return m_pInstance;
 	}
 
 	void GameWindow::Run()
@@ -25,6 +35,21 @@ namespace App {
 
 			SwapBuffers();
 		}
+	}
+
+	GLFWwindow* const GameWindow::GetGLFWWindow() const
+	{
+		return m_pWindow;
+	}
+
+	int GameWindow::GetHeight() const
+	{
+		return m_Height;
+	}
+
+	int GameWindow::GetWidth() const
+	{
+		return m_Width;
 	}
 
 	void GameWindow::OnLoad()
@@ -54,14 +79,14 @@ namespace App {
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
-		m_Window = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), nullptr, nullptr);
-		if (m_Window == NULL)
+		m_pWindow = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), nullptr, nullptr);
+		if (m_pWindow == nullptr)
 		{
 			LogError("Failed to create GLFW window!");
 			glfwTerminate();
 			return false;
 		}
-		glfwMakeContextCurrent(m_Window);
+		glfwMakeContextCurrent(m_pWindow);
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{
@@ -87,7 +112,7 @@ namespace App {
 
 	bool GameWindow::Closed()
 	{
-		return glfwWindowShouldClose(m_Window) ? true : false;
+		return glfwWindowShouldClose(m_pWindow) ? true : false;
 	}
 
 	void GameWindow::PollEvents()
@@ -97,7 +122,7 @@ namespace App {
 
 	void GameWindow::SwapBuffers()
 	{
-		glfwSwapBuffers(m_Window);
+		glfwSwapBuffers(m_pWindow);
 	}
 
 	void GameWindow::SetClearColor(float r, float g, float b, float a)

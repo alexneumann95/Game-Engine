@@ -48,6 +48,42 @@ namespace Maths {
 		return *this;
 	}
 
+	vec3& vec3::Add(float scalar)
+	{
+		X += scalar;
+		Y += scalar;
+		Z += scalar;
+
+		return *this;
+	}
+
+	vec3& vec3::Subtract(float scalar)
+	{
+		X -= scalar;
+		Y -= scalar;
+		Z -= scalar;
+
+		return *this;
+	}
+
+	vec3& vec3::Multiply(float scalar)
+	{
+		X *= scalar;
+		Y *= scalar;
+		Z *= scalar;
+
+		return *this;
+	}
+
+	vec3& vec3::Divide(float scalar)
+	{
+		X /= scalar;
+		Y /= scalar;
+		Z /= scalar;
+
+		return *this;
+	}
+
 	vec3 operator + (vec3 lhs, const vec3& rhs)
 	{
 		return lhs.Add(rhs);
@@ -66,6 +102,26 @@ namespace Maths {
 	vec3 operator / (vec3 lhs, const vec3& rhs)
 	{
 		return lhs.Divide(rhs);
+	}
+
+	vec3 operator + (vec3 lhs, float scalar)
+	{
+		return lhs.Add(scalar);
+	}
+
+	vec3 operator - (vec3 lhs, float scalar)
+	{
+		return lhs.Subtract(scalar);
+	}
+
+	vec3 operator * (vec3 lhs, float scalar)
+	{
+		return lhs.Multiply(scalar);
+	}
+
+	vec3 operator / (vec3 lhs, float scalar)
+	{
+		return lhs.Divide(scalar);
 	}
 
 	bool vec3::operator == (const vec3& other)
@@ -96,6 +152,26 @@ namespace Maths {
 	vec3& vec3::operator /= (const vec3& rhs)
 	{
 		return Divide(rhs);
+	}
+
+	vec3& vec3::operator += (float scalar)
+	{
+		return Add(scalar);
+	}
+
+	vec3& vec3::operator -= (float scalar)
+	{
+		return Subtract(scalar);
+	}
+
+	vec3& vec3::operator *= (float scalar)
+	{
+		return Multiply(scalar);
+	}
+
+	vec3& vec3::operator /= (float scalar)
+	{
+		return Divide(scalar);
 	}
 
 	vec3 vec3::Cross(const vec3& lhs, const vec3& rhs)

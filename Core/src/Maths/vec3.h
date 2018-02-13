@@ -16,11 +16,19 @@ namespace Maths {
 		vec3& Subtract(const vec3& other);
 		vec3& Multiply(const vec3& other);
 		vec3& Divide(const vec3& other);
+		vec3& Add(float scalar);
+		vec3& Subtract(float scalar);
+		vec3& Multiply(float scalar);
+		vec3& Divide(float scalar);
 
-		friend vec3 operator + (vec3 lhs, const vec3& rhs);
-		friend vec3 operator - (vec3 lhs, const vec3& rhs);
-		friend vec3 operator * (vec3 lhs, const vec3& rhs);
-		friend vec3 operator / (vec3 lhs, const vec3& rhs);
+		GE_API friend vec3 operator + (vec3 lhs, const vec3& rhs);
+		GE_API friend vec3 operator - (vec3 lhs, const vec3& rhs);
+		GE_API friend vec3 operator * (vec3 lhs, const vec3& rhs);
+		GE_API friend vec3 operator / (vec3 lhs, const vec3& rhs);
+		GE_API friend vec3 operator + (vec3 lhs, float scalar);
+		GE_API friend vec3 operator - (vec3 lhs, float scalar);
+		GE_API friend vec3 operator * (vec3 lhs, float scalar);
+		GE_API friend vec3 operator / (vec3 lhs, float scalar);
 
 		bool operator == (const vec3& other);
 		bool operator != (const vec3& other);
@@ -29,6 +37,10 @@ namespace Maths {
 		vec3& operator -= (const vec3& rhs);
 		vec3& operator *= (const vec3& rhs);
 		vec3& operator /= (const vec3& rhs);
+		vec3& operator += (float scalar);
+		vec3& operator -= (float scalar);
+		vec3& operator *= (float scalar);
+		vec3& operator /= (float scalar);
 
 		static vec3 Cross(const vec3& lhs, const vec3& rhs);
 		static float Dot(const vec3& lhs, const vec3& rhs);

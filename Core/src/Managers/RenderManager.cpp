@@ -34,7 +34,7 @@ namespace Managers {
 
 	void RenderManager::Draw()
 	{
-		ShaderManager::Instance()->GetShader()->Use();
+		SHADER_MANAGER->GetShader()->Use();
 
 		for (auto iter : EntityManager::Instance()->GetGameObjects())
 		{
@@ -42,6 +42,12 @@ namespace Managers {
 
 			pGameObject->GetRenderComp()->GetVertexBuffer()->BindVAO();
 			pGameObject->GetRenderComp()->GetElementBuffer()->BindEBO();
+
+			Maths::mat4 model = Maths::mat4::Identity();
+			Maths::mat4 view = ENTITY_MANAGER->GetActiveCamera()->GetViewMatrix();
+			Maths::mat4 proj = ENTITY_MANAGER->GetActiveCamera()->GetPerspectiveMatrix();
+			Maths::mat4 MVPMatrix = proj * view * model;
+			SHADER_MANAGER->GetShader()->SetUniform("vMVPMatrix", MVPMatrix.Invert());
 
 			glDrawElements(GL_TRIANGLES, pGameObject->GetModelComp()->GetModel()->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
 		}

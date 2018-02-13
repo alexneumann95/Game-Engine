@@ -104,7 +104,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "F:\Programming\C++\Game-Engine\bin\Debug\GameEngine.dll" "F:\Programming\C++\Genetics-Simulation\bin\Debug\GameEngine.dll"</Command>
@@ -122,7 +122,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "F:\Programming\C++\Game-Engine\bin\Debug\GameEngine.dll" "F:\Programming\C++\Genetics-Simulation\bin\Debug\GameEngine.dll"</Command>
@@ -171,12 +171,14 @@
     <ClCompile Include="src\Components\ModelComponent.cpp" />
     <ClCompile Include="src\Components\RenderComponent.cpp" />
     <ClCompile Include="src\dllmain.cpp" />
+    <ClCompile Include="src\Entities\Camera.cpp" />
     <ClCompile Include="src\Entities\Entity.cpp" />
     <ClCompile Include="src\Entities\GameObject.cpp" />
     <ClCompile Include="src\Graphics\Shader.cpp" />
     <ClCompile Include="src\Managers\EntityManager.cpp" />
     <ClCompile Include="src\Managers\EUID.cpp" />
     <ClCompile Include="src\Managers\FileManager.cpp" />
+    <ClCompile Include="src\Managers\InputManager.cpp" />
     <ClCompile Include="src\Managers\RenderManager.cpp" />
     <ClCompile Include="src\Managers\ResourceManager.cpp" />
     <ClCompile Include="src\Managers\RUID.cpp" />
@@ -194,13 +196,14 @@
   <ItemGroup>
     <ClInclude Include="dependencies\includes\glad\glad.h" />
     <ClInclude Include="src\API.h" />
-    <ClInclude Include="src\app\GameWindow.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="src\app\GameWindow.h" />
     <ClInclude Include="src\Common.h" />
     <ClInclude Include="src\Components\Component.h" />
     <ClInclude Include="src\Components\ModelComponent.h" />
     <ClInclude Include="src\Components\RenderComponent.h" />
     <ClInclude Include="src\EngineControl.h" />
+    <ClInclude Include="src\Entities\Camera.h" />
     <ClInclude Include="src\Entities\Entity.h" />
     <ClInclude Include="src\Entities\GameObject.h" />
     <ClInclude Include="src\Graphics\Shader.h" />
@@ -208,6 +211,7 @@
     <ClInclude Include="src\Managers\EntityManager.h" />
     <ClInclude Include="src\Managers\EUID.h" />
     <ClInclude Include="src\Managers\FileManager.h" />
+    <ClInclude Include="src\Managers\InputManager.h" />
     <ClInclude Include="src\Managers\Manager.h" />
     <ClInclude Include="src\Managers\RenderManager.h" />
     <ClInclude Include="src\Managers\ResourceManager.h" />

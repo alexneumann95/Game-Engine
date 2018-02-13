@@ -9,4 +9,11 @@ namespace Managers {
 		return id;
 	}
 
+	std::string NextCameraEUID()
+	{
+		static int nextCameraNo = 1;
+		std::string id = "Entities.Cameras." + std::to_string(nextCameraNo++);
+		return id;
+	}
+
 }

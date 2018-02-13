@@ -19,11 +19,19 @@ namespace Maths {
 		vec4& Subtract(const vec4& other);
 		vec4& Multiply(const vec4& other);
 		vec4& Divide(const vec4& other);
+		vec4& Add(float scalar);
+		vec4& Subtract(float scalar);
+		vec4& Multiply(float scalar);
+		vec4& Divide(float scalar);
 
-		friend vec4 operator + (vec4 lhs, const vec4& rhs);
-		friend vec4 operator - (vec4 lhs, const vec4& rhs);
-		friend vec4 operator * (vec4 lhs, const vec4& rhs);
-		friend vec4 operator / (vec4 lhs, const vec4& rhs);
+		GE_API friend vec4 operator + (vec4 lhs, const vec4& rhs);
+		GE_API friend vec4 operator - (vec4 lhs, const vec4& rhs);
+		GE_API friend vec4 operator * (vec4 lhs, const vec4& rhs);
+		GE_API friend vec4 operator / (vec4 lhs, const vec4& rhs);
+		GE_API friend vec4 operator + (vec4 lhs, float scalar);
+		GE_API friend vec4 operator - (vec4 lhs, float scalar);
+		GE_API friend vec4 operator * (vec4 lhs, float scalar);
+		GE_API friend vec4 operator / (vec4 lhs, float scalar);
 
 		bool operator == (const vec4& other);
 		bool operator != (const vec4& other);
@@ -32,6 +40,10 @@ namespace Maths {
 		vec4& operator -= (const vec4& rhs);
 		vec4& operator *= (const vec4& rhs);
 		vec4& operator /= (const vec4& rhs);
+		vec4& operator += (float scalar);
+		vec4& operator -= (float scalar);
+		vec4& operator *= (float scalar);
+		vec4& operator /= (float scalar);
 
 		static vec4 Cross(const vec4& lhs, const vec4& rhs);
 		static float Dot(const vec4& lhs, const vec4& rhs);

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Managers\FileManager.h"
+#include "Managers\InputManager.h"
 #include "Managers\ResourceManager.h"
 #include "Managers\EntityManager.h"
 #include "Managers\ShaderManager.h"
@@ -15,6 +16,7 @@ namespace EngineControl
 	bool EngineStartUp()
 	{
 		Managers.push_back(new Managers::FileManager());
+		Managers.push_back(new Managers::InputManager());
 		Managers.push_back(new Managers::ResourceManager());
 		Managers.push_back(new Managers::EntityManager());
 		Managers.push_back(new Managers::ShaderManager());
