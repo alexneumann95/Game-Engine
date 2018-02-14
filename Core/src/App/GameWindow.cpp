@@ -107,6 +107,9 @@ namespace App {
 			std::cout << "DEBUG CONTEXT ENABLED" << std::endl;
 		}
 
+		glfwSwapInterval(0);
+		glEnable(GL_DEPTH_TEST);
+
 		return true;
 	}
 

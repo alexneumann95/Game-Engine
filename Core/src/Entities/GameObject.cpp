@@ -8,8 +8,14 @@ namespace Entities {
 
 	}
 
+	GameObject::GameObject(const GameObject& other) : Entity(other.GetEUID())
+	{
+		m_pTransformComp = new TransformComponent(this); // Every game object has a transform component (when added to the entity manager)
+	}
+
 	GameObject::~GameObject()
 	{
+		delete m_pTransformComp;
 		delete m_pModelComp;
 		delete m_pRenderComp;
 	}
@@ -21,10 +27,17 @@ namespace Entities {
 
 	void GameObject::InitComponents()
 	{
+		if (m_ComponentsInitialised)
+			return;
+
+		m_pTransformComp->Init();
+
 		if (m_pModelComp != nullptr)
 			m_pModelComp->Init();
 		if (m_pRenderComp != nullptr)
 			m_pRenderComp->Init();
+
+		m_ComponentsInitialised = true;
 	}
 
 	void GameObject::AddModelComp(const std::string& modelFile)
@@ -37,6 +50,11 @@ namespace Entities {
 	{
 		if (m_pRenderComp == nullptr)
 			m_pRenderComp = new RenderComponent(this);
+	}
+
+	TransformComponent* const GameObject::GetTransformComp() const
+	{
+		return m_pTransformComp;
 	}
 
 	ModelComponent* const GameObject::GetModelComp() const

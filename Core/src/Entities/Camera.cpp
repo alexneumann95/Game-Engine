@@ -3,7 +3,7 @@
 
 namespace Entities {
 
-	Camera::Camera(const std::string& EUID) : Entity(EUID), m_Position(vec3(0.0f, 0.0f, 2.0f)), m_Direction(vec3(0.0f, 0.0f, -1.0f)), 
+	Camera::Camera(const std::string& EUID) : Entity(EUID), m_Position(vec3(0.0f, 0.0f, 2.0f)), m_Focus(vec3(0.0f, 0.0f, -1.0f)), 
 		m_Up(vec3(0.0f, 1.0f, 0.0f)), m_FOV(90.0f), m_Near(0.1f), m_Far(100.0f)
 	{
 		
@@ -19,9 +19,9 @@ namespace Entities {
 		m_Position = pos;
 	}
 
-	void Camera::SetDirection(const vec3& direction)
+	void Camera::SetFocus(const vec3& focus)
 	{
-		m_Direction = direction;
+		m_Focus = focus;
 	}
 
 	void Camera::SetUp(const vec3& up)
@@ -62,9 +62,9 @@ namespace Entities {
 		return m_Position;
 	}
 
-	const vec3& Camera::GetDirection() const
+	const vec3& Camera::GetFocus() const
 	{
-		return m_Direction;
+		return m_Focus;
 	}
 
 	const vec3& Camera::GetUp() const
@@ -89,7 +89,7 @@ namespace Entities {
 
 	const mat4& Camera::GetViewMatrix()
 	{
-		m_ViewMatrix = mat4::CreateLookAt(m_Position, m_Position + m_Direction, m_Up);
+		m_ViewMatrix = mat4::LookAt(m_Position, m_Position + m_Focus, m_Up);
 		return m_ViewMatrix;
 	}
 
@@ -98,7 +98,7 @@ namespace Entities {
 		float width = (float)GAME_WINDOW->GetWidth();
 		float height = (float)GAME_WINDOW->GetHeight();
 
-		m_PerspectiveMatrix = mat4::CreatePerspective(m_FOV, width / height, m_Near, m_Far);
+		m_PerspectiveMatrix = mat4::Perspective(m_FOV, width / height, m_Near, m_Far);
 		return m_PerspectiveMatrix;
 	}
 

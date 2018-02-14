@@ -2,6 +2,7 @@
 
 #include "Entity.h"
 #include "..\Managers\EUID.h"
+#include "..\Components\TransformComponent.h"
 #include "..\Components\ModelComponent.h"
 #include "..\Components\RenderComponent.h"
 
@@ -13,6 +14,7 @@ namespace Entities {
 	{
 	public:
 		GameObject(const std::string& EUID = Managers::NextGameObjectEUID());
+		GameObject(const GameObject& other);
 		~GameObject();
 
 		virtual GameObject* Clone() const;
@@ -24,9 +26,13 @@ namespace Entities {
 		void AddModelComp(const std::string& modelFile);
 		void AddRenderComp();
 
+		TransformComponent* const GetTransformComp() const;
 		ModelComponent* const GetModelComp() const;
 		RenderComponent* const GetRenderComp() const;
 	private:
+		bool m_ComponentsInitialised = false;
+
+		TransformComponent* m_pTransformComp = nullptr;
 		ModelComponent* m_pModelComp = nullptr;
 		RenderComponent* m_pRenderComp = nullptr;
 	};

@@ -19,7 +19,7 @@ namespace Entities {
 		void Update() override { }
 
 		void SetPosition(const vec3& pos);
-		void SetDirection(const vec3& direction);
+		void SetFocus(const vec3& focus);
 		void SetUp(const vec3& up);
 		void SetFOV(float value);
 		void SetNear(float value);
@@ -29,7 +29,7 @@ namespace Entities {
 		void DecrementPosition(const vec3& amount);
 
 		const vec3& GetPosition() const;
-		const vec3& GetDirection() const;
+		const vec3& GetFocus() const;
 		const vec3& GetUp() const;
 		float GetFOV() const;
 		float GetNear() const;
@@ -38,7 +38,7 @@ namespace Entities {
 		const mat4& GetPerspectiveMatrix();
 	private:
 		vec3 m_Position;
-		vec3 m_Direction;
+		vec3 m_Focus;
 		vec3 m_Up;
 		mat4 m_ViewMatrix;
 		mat4 m_PerspectiveMatrix;

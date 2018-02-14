@@ -30,6 +30,10 @@ namespace Managers {
 			delete iter.second;
 		m_GameObjects.clear();
 
+		for (auto iter : m_Cameras)
+			delete iter.second;
+		m_Cameras.clear();
+
 		return true;
 	}
 
