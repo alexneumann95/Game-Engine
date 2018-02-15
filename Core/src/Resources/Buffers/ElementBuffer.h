@@ -16,6 +16,7 @@ namespace Resources { namespace Buffers {
 		void LoadData(unsigned int offsetCount, unsigned int count, const void* pData) override;
 
 		void BindEBO();
+		void UnbindEBO();
 	private:
 	};
 

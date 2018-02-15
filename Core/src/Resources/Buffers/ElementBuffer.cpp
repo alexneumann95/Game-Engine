@@ -36,4 +36,9 @@ namespace Resources { namespace Buffers {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GetBufferObject());
 	}
 
+	void ElementBuffer::UnbindEBO()
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+
 } }

@@ -43,6 +43,7 @@ namespace Managers {
 
 			pGameObject->GetRenderComp()->GetVertexBuffer()->BindVAO();
 			pGameObject->GetRenderComp()->GetElementBuffer()->BindEBO();
+			pGameObject->GetModelComp()->GetTexture()->Bind();
 
 			mat4 modelMatrix = pGameObject->GetTransformComp()->GetModelMatrix();
 			SHADER_MANAGER->GetShader()->SetUniform("vModel", modelMatrix);
@@ -52,6 +53,10 @@ namespace Managers {
 			SHADER_MANAGER->GetShader()->SetUniform("vProj", projMatrix);	
 
 			glDrawElements(GL_TRIANGLES, pGameObject->GetModelComp()->GetModel()->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
+
+			pGameObject->GetModelComp()->GetTexture()->Unbind();
+			pGameObject->GetRenderComp()->GetElementBuffer()->UnbindEBO();
+			pGameObject->GetRenderComp()->GetVertexBuffer()->UnbindVAO();	
 		}
 	}
 

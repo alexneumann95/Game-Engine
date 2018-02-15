@@ -34,6 +34,10 @@ namespace Managers {
 			delete iter.second;
 		m_Models.clear();
 
+		for (auto iter : m_Textures)
+			delete iter.second;
+		m_Textures.clear();
+
 		return true;
 	}
 
@@ -70,6 +74,17 @@ namespace Managers {
 		return result.first->first;
 	}
 
+	const std::string& ResourceManager::AddTexture(const std::string& file)
+	{
+		std::string RUID = GenTextureRUID(file);
+		if (CheckTextureExists(RUID))
+			return m_Textures.find(RUID)->first;
+
+		std::pair<TextureMap::iterator, bool> result = m_Textures.insert(std::pair<std::string, Texture*>(RUID, new Texture(file, RUID)));
+		result.first->second->Init();
+		return result.first->first;
+	}
+
 	bool ResourceManager::CheckVertexBufferExists(const std::string& RUID)
 	{
 		return m_VertexBuffers.find(RUID) != m_VertexBuffers.end() ? true : false;
@@ -83,6 +98,11 @@ namespace Managers {
 	bool ResourceManager::CheckModelExists(const std::string& RUID)
 	{
 		return m_Models.find(RUID) != m_Models.end() ? true : false;
+	}
+
+	bool ResourceManager::CheckTextureExists(const std::string& RUID)
+	{
+		return m_Textures.find(RUID) != m_Textures.end() ? true : false;
 	}
 
 	VertexBuffer* const ResourceManager::GetVertexBuffer(const std::string& RUID)
@@ -101,6 +121,12 @@ namespace Managers {
 	{
 		auto iter = m_Models.find(RUID);
 		return iter != m_Models.end() ? iter->second : nullptr;
+	}
+
+	Texture* const ResourceManager::GetTexture(const std::string& RUID)
+	{
+		auto iter = m_Textures.find(RUID);
+		return iter != m_Textures.end() ? iter->second : nullptr;
 	}
 
 	bool ResourceManager::DestroyVertexBuffer(const std::string& RUID)
@@ -135,6 +161,18 @@ namespace Managers {
 		auto iter = m_Models.find(RUID);
 		delete iter->second;
 		m_Models.erase(iter);
+
+		return true;
+	}
+
+	bool ResourceManager::DestroyTexture(const std::string& RUID)
+	{
+		if (!CheckTextureExists(RUID))
+			return false;
+
+		auto iter = m_Textures.find(RUID);
+		delete iter->second;
+		m_Textures.erase(iter);
 
 		return true;
 	}

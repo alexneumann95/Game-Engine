@@ -3,7 +3,7 @@
 
 namespace Resources {
 
-	Model::Model(const std::string& file, const std::string& RUID) : Resource(RUID), m_File(file)
+	Model::Model(const std::string& file, const std::string& RUID) : Resource(RUID), m_ModelFile(file)
 	{
 
 	}
@@ -38,18 +38,24 @@ namespace Resources {
 		return static_cast<unsigned int>(m_Indices.size());
 	}
 
+	const std::string& const Model::GetTextureFileName() const
+	{
+		return m_TextureFile;
+	}
+
 	void Model::LoadModelData()
 	{
-		std::ifstream file(FILE_MANAGER->GetExeDirectory() + "models\\" + m_File);
+		std::ifstream file(FILE_MANAGER->GetExeDirectory() + "models\\" + m_ModelFile);
 		if (file.fail())
 		{
-			LogError("Failed to open model data file: " + m_File);
+			LogError("Failed to open model data file: " + m_ModelFile);
 			return;
 		}
 
 		std::string identifier = "";
 		std::vector<Maths::vec3> positions;
 		std::vector<Maths::vec4> colours;
+		std::vector<Maths::vec2> texCoords;
 
 		while (!file.eof())
 		{	
@@ -67,6 +73,12 @@ namespace Resources {
 				file >> x; file >> y; file >> z; file >> w;
 				colours.push_back(Maths::vec4(x, y, z, w));
 			}
+			else if (identifier == "t")
+			{
+				float x, y;
+				file >> x; file >> y;
+				texCoords.push_back(Maths::vec2(x, y));
+			}
 			else if (identifier == "i")
 			{
 				ELEMENT_BUFFER_DATA_TYPE index;
@@ -76,19 +88,23 @@ namespace Resources {
 					m_Indices.push_back(index);
 				}
 			}
+			else if (identifier == "tf")
+			{
+				file >> m_TextureFile;
+			}
 			else
-				LogError("Unknown identifier read in: " + m_File);
+				LogError("Unknown identifier read in: " + m_ModelFile);
 
 		}
 
-		if (positions.size() != colours.size())
+		if (positions.size() != colours.size() || positions.size() != texCoords.size())
 		{
-			LogError("The number of positions is not equal to the number of colours for: " + m_File);
+			LogError("Data file is incomplete! (" + m_ModelFile + ")");
 			return;
 		}
 
 		for (int i = 0; i < positions.size(); ++i)
-			m_Vertices.push_back(Graphics::Vertex(positions[i], colours[i]));
+			m_Vertices.push_back(Graphics::Vertex(positions[i], colours[i], texCoords[i]));
 
 		file.close();
 	}

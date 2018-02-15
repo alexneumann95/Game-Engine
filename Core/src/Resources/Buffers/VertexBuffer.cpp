@@ -39,6 +39,16 @@ namespace Resources { namespace Buffers {
 		glBindBuffer(GL_ARRAY_BUFFER, GetBufferObject());
 	}
 
+	void VertexBuffer::UnbindVAO()
+	{
+		glBindVertexArray(0);
+	}
+
+	void VertexBuffer::UnbindVBO()
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+
 	void VertexBuffer::SetupVAO()
 	{
 		glCreateVertexArrays(1, &m_VertexArrayObject);
@@ -46,10 +56,15 @@ namespace Resources { namespace Buffers {
 		BindVAO();
 		BindVBO();
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, false, 7 * sizeof(float), 0);
-		glVertexAttribPointer(1, 4, GL_FLOAT, false, 7 * sizeof(float), (const void*)(3 * sizeof(float)));
+		glVertexAttribPointer(0, 3, GL_FLOAT, false, 9 * sizeof(float), 0);
+		glVertexAttribPointer(1, 4, GL_FLOAT, false, 9 * sizeof(float), (const void*)(3 * sizeof(float)));
+		glVertexAttribPointer(2, 2, GL_FLOAT, false, 9 * sizeof(float), (const void*)(7 * sizeof(float)));
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
+		glEnableVertexAttribArray(2);
+
+		UnbindVBO();
+		UnbindVAO();
 	}
 
 } }

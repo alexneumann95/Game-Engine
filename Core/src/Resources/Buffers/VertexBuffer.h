@@ -15,6 +15,8 @@ namespace Resources { namespace Buffers {
 
 		void BindVAO();
 		void BindVBO();
+		void UnbindVAO();
+		void UnbindVBO();
 	private:
 		void SetupVAO();
 	private:

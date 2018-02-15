@@ -21,4 +21,9 @@ namespace Managers {
 		return "Resources.Models." + file.substr(0, file.find_last_of('.'));
 	}
 
+	std::string GenTextureRUID(const std::string& file)
+	{
+		return "Resources.Textures." + file.substr(0, file.find_last_of('.'));
+	}
+
 }

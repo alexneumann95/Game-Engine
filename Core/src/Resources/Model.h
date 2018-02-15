@@ -21,10 +21,12 @@ namespace Resources {
 		const std::vector<ELEMENT_BUFFER_DATA_TYPE>& GetIndices() const;
 		unsigned int GetNumVertices() const;
 		unsigned int GetNumIndices() const;
+		const std::string& GetTextureFileName() const;
 	private:
 		void LoadModelData();
 	private:
-		std::string m_File;
+		std::string m_ModelFile;
+		std::string m_TextureFile;
 		std::vector<Graphics::Vertex> m_Vertices;
 		std::vector<ELEMENT_BUFFER_DATA_TYPE> m_Indices;
 	};
