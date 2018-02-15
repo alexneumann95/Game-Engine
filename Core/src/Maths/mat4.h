@@ -28,7 +28,7 @@ namespace Maths {
 		static mat4 Translation(const vec3& translation);
 		static mat4 Scale(const vec3& scale);
 		static mat4 Rotation(float angle, const vec3& axis);
-		static mat4 LookAt(const vec3& position, const vec3& object, const vec3& up = vec3(0.0f, 1.0f, 0.0f));
+		static mat4 LookAt(const vec3& position, const vec3& centre, const vec3& up = vec3(0.0f, 1.0f, 0.0f));
 		static mat4 Perspective(float fov, float aspectRatio, float n, float f);
 
 		GE_API friend std::ostream& operator << (std::ostream& os, const mat4& matrix);

@@ -37,6 +37,25 @@ namespace App {
 		}
 	}
 
+	void GameWindow::Terminate()
+	{
+		glfwSetWindowShouldClose(m_pWindow, true);
+	}
+
+	void GameWindow::DisableCursor(bool value)
+	{
+		if (value)
+			glfwSetInputMode(m_pWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		else
+			glfwSetInputMode(m_pWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	}
+
+	void GameWindow::SetTitle(const std::string& title)
+	{
+		m_Title = title;
+		glfwSetWindowTitle(m_pWindow, title.c_str());
+	}
+
 	GLFWwindow* const GameWindow::GetGLFWWindow() const
 	{
 		return m_pWindow;
@@ -52,6 +71,11 @@ namespace App {
 		return m_Width;
 	}
 
+	const Utilities::GameTimer& GameWindow::GetGameTimer() const
+	{
+		return m_GameTimer;
+	}
+
 	void GameWindow::OnLoad()
 	{
 		Initialise();
@@ -61,6 +85,7 @@ namespace App {
 	void GameWindow::OnUpdateFrame()
 	{
 		EngineControl::EngineUpdate();
+		m_GameTimer.Tick();
 	}
 
 	void GameWindow::OnRenderFrame()

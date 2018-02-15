@@ -1,6 +1,7 @@
 #pragma once
 
 #include "..\Common.h"
+#include "..\Utilities\GameTimer.h"
 
 #include <glad\glad.h>
 #include <glfw\glfw3.h>
@@ -17,9 +18,14 @@ namespace App {
 
 		void Run();
 
+		void Terminate();
+		void DisableCursor(bool value = true);
+		void SetTitle(const std::string& title);
+
 		GLFWwindow* const GetGLFWWindow() const;
 		int GetHeight() const;
 		int GetWidth() const;
+		const Utilities::GameTimer& GetGameTimer() const;
 	protected:
 		virtual void OnLoad();
 		virtual void OnUpdateFrame();
@@ -38,6 +44,8 @@ namespace App {
 		std::string m_Title = "Game Window";
 		GLFWwindow* m_pWindow = nullptr;
 		float m_ClearColor[4] = { 0.2f, 0.7f, 0.8f, 1.0f };
+
+		Utilities::GameTimer m_GameTimer;
 	};
 
 }

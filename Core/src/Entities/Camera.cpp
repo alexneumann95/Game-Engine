@@ -3,7 +3,7 @@
 
 namespace Entities {
 
-	Camera::Camera(const std::string& EUID) : Entity(EUID), m_Position(vec3(0.0f, 0.0f, 2.0f)), m_Focus(vec3(0.0f, 0.0f, -1.0f)), 
+	Camera::Camera(const std::string& EUID) : Entity(EUID), m_Position(vec3(0.0f, 0.0f, 2.0f)), m_Front(vec3(0.0f, 0.0f, -1.0f)),
 		m_Up(vec3(0.0f, 1.0f, 0.0f)), m_FOV(90.0f), m_Near(0.1f), m_Far(100.0f)
 	{
 		
@@ -19,9 +19,9 @@ namespace Entities {
 		m_Position = pos;
 	}
 
-	void Camera::SetFocus(const vec3& focus)
+	void Camera::SetFront(const vec3& focus)
 	{
-		m_Focus = focus;
+		m_Front = focus;
 	}
 
 	void Camera::SetUp(const vec3& up)
@@ -62,9 +62,9 @@ namespace Entities {
 		return m_Position;
 	}
 
-	const vec3& Camera::GetFocus() const
+	const vec3& Camera::GetFront() const
 	{
-		return m_Focus;
+		return m_Front;
 	}
 
 	const vec3& Camera::GetUp() const
@@ -89,7 +89,7 @@ namespace Entities {
 
 	const mat4& Camera::GetViewMatrix()
 	{
-		m_ViewMatrix = mat4::LookAt(m_Position, m_Position + m_Focus, m_Up);
+		m_ViewMatrix = mat4::LookAt(m_Position, m_Front + m_Position, m_Up);
 		return m_ViewMatrix;
 	}
 

@@ -49,7 +49,7 @@ namespace Managers {
 			mat4 viewMatrix = ENTITY_MANAGER->GetActiveCamera()->GetViewMatrix();
 			SHADER_MANAGER->GetShader()->SetUniform("vView", viewMatrix);
 			mat4 projMatrix = ENTITY_MANAGER->GetActiveCamera()->GetPerspectiveMatrix();
-			SHADER_MANAGER->GetShader()->SetUniform("vProj", projMatrix);		
+			SHADER_MANAGER->GetShader()->SetUniform("vProj", projMatrix);	
 
 			glDrawElements(GL_TRIANGLES, pGameObject->GetModelComp()->GetModel()->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
 		}

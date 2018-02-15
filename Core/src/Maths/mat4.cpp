@@ -97,9 +97,9 @@ namespace Maths {
 		return result;
 	}
 
-	mat4 mat4::LookAt(const vec3& position, const vec3& object, const vec3& up)
+	mat4 mat4::LookAt(const vec3& position, const vec3& centre, const vec3& up)
 	{
-		vec3 f = (object - position).Normalise();
+		vec3 f = (centre - position).Normalise();
 		vec3 r = vec3::Cross(f, up).Normalise();
 		vec3 u = vec3::Cross(r, f).Normalise();
 
