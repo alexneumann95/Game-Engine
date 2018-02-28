@@ -1,9 +1,11 @@
 #pragma once
 
 #include "Manager.h"
-#include "..\Maths\mat4.h"
 
+#include <MathsLib\Containers\mat4.h>
 #include <glad\glad.h>
+
+using Maths::Containers::mat4;
 
 namespace Managers {
 

@@ -4,7 +4,7 @@
 
 #include <glad\glad.h>
 
-namespace Resources { namespace Buffers {
+namespace Resources::Buffers {
 
 	class GE_API Buffer : public Resource
 	{
@@ -23,4 +23,4 @@ namespace Resources { namespace Buffers {
 		unsigned int m_Size = 0;
 	};
 
-} }
+}

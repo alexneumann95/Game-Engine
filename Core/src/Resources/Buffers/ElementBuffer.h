@@ -4,7 +4,7 @@
 
 #define ELEMENT_BUFFER_DATA_TYPE unsigned int
 
-namespace Resources { namespace Buffers {
+namespace Resources::Buffers {
 
 	class GE_API ElementBuffer final : public Buffer
 	{
@@ -20,4 +20,4 @@ namespace Resources { namespace Buffers {
 	private:
 	};
 
-} }
+}

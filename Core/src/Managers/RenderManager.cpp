@@ -3,6 +3,7 @@
 #include "EntityManager.h"
 #include "..\App\GameWindow.h"
 
+
 namespace Managers {
 
 	RenderManager* RenderManager::m_pInstance = nullptr;
@@ -45,11 +46,11 @@ namespace Managers {
 			pGameObject->GetRenderComp()->GetElementBuffer()->BindEBO();
 			pGameObject->GetModelComp()->GetTexture()->Bind();
 
-			mat4 modelMatrix = pGameObject->GetTransformComp()->GetModelMatrix();
+			mat4<float> modelMatrix = pGameObject->GetTransformComp()->GetModelMatrix();
 			SHADER_MANAGER->GetShader()->SetUniform("vModel", modelMatrix);
-			mat4 viewMatrix = ENTITY_MANAGER->GetActiveCamera()->GetViewMatrix();
+			mat4<float> viewMatrix = ENTITY_MANAGER->GetActiveCamera()->GetViewMatrix();
 			SHADER_MANAGER->GetShader()->SetUniform("vView", viewMatrix);
-			mat4 projMatrix = ENTITY_MANAGER->GetActiveCamera()->GetPerspectiveMatrix();
+			mat4<float> projMatrix = ENTITY_MANAGER->GetActiveCamera()->GetPerspectiveMatrix();
 			SHADER_MANAGER->GetShader()->SetUniform("vProj", projMatrix);	
 
 			glDrawElements(GL_TRIANGLES, pGameObject->GetModelComp()->GetModel()->GetNumIndices(), GL_UNSIGNED_INT, nullptr);

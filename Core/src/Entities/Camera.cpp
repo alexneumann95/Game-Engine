@@ -3,8 +3,8 @@
 
 namespace Entities {
 
-	Camera::Camera(const std::string& EUID) : Entity(EUID), m_Position(vec3(0.0f, 0.0f, 2.0f)), m_Front(vec3(0.0f, 0.0f, -1.0f)),
-		m_Up(vec3(0.0f, 1.0f, 0.0f)), m_FOV(90.0f), m_Near(0.1f), m_Far(100.0f)
+	Camera::Camera(const std::string& EUID) : Entity(EUID), m_Position(vec3<float>(0.0f, 0.0f, 2.0f)), m_Front(vec3<float>(0.0f, 0.0f, -1.0f)),
+		m_Up(vec3<float>(0.0f, 1.0f, 0.0f)), m_FOV(90.0f), m_Near(0.1f), m_Far(100.0f)
 	{
 		
 	}
@@ -14,17 +14,17 @@ namespace Entities {
 		return new Camera(*this);
 	}
 
-	void Camera::SetPosition(const vec3& pos)
+	void Camera::SetPosition(const vec3<float>& pos)
 	{
 		m_Position = pos;
 	}
 
-	void Camera::SetFront(const vec3& focus)
+	void Camera::SetFront(const vec3<float>& focus)
 	{
 		m_Front = focus;
 	}
 
-	void Camera::SetUp(const vec3& up)
+	void Camera::SetUp(const vec3<float>& up)
 	{
 		m_Up = up;
 	}
@@ -47,27 +47,27 @@ namespace Entities {
 			m_Far = value;
 	}
 
-	void Camera::IncrementPosition(const vec3& amount)
+	void Camera::IncrementPosition(const vec3<float>& amount)
 	{
 		m_Position += amount;
 	}
 
-	void Camera::DecrementPosition(const vec3& amount)
+	void Camera::DecrementPosition(const vec3<float>& amount)
 	{
 		m_Position -= amount;
 	}
 
-	const vec3& Camera::GetPosition() const
+	const vec3<float>& Camera::GetPosition() const
 	{
 		return m_Position;
 	}
 
-	const vec3& Camera::GetFront() const
+	const vec3<float>& Camera::GetFront() const
 	{
 		return m_Front;
 	}
 
-	const vec3& Camera::GetUp() const
+	const vec3<float>& Camera::GetUp() const
 	{
 		return m_Up;
 	}
@@ -87,18 +87,18 @@ namespace Entities {
 		return m_Far;
 	}
 
-	const mat4& Camera::GetViewMatrix()
+	const mat4<float>& Camera::GetViewMatrix()
 	{
-		m_ViewMatrix = mat4::LookAt(m_Position, m_Front + m_Position, m_Up);
+		m_ViewMatrix = mat4<float>::LookAt(m_Position, m_Front + m_Position, m_Up);
 		return m_ViewMatrix;
 	}
 
-	const mat4& Camera::GetPerspectiveMatrix()
+	const mat4<float>& Camera::GetPerspectiveMatrix()
 	{
 		float width = (float)GAME_WINDOW->GetWidth();
 		float height = (float)GAME_WINDOW->GetHeight();
 
-		m_PerspectiveMatrix = mat4::Perspective(m_FOV, width / height, m_Near, m_Far);
+		m_PerspectiveMatrix = mat4<float>::Perspective(m_FOV, width / height, m_Near, m_Far);
 		return m_PerspectiveMatrix;
 	}
 

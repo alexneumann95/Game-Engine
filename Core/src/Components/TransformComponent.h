@@ -1,10 +1,14 @@
 #pragma once
 
 #include "Component.h"
-#include "..\Maths\vec3.h"
-#include "..\Maths\mat4.h"
 
-using namespace Maths;
+#include <MathsLib\Containers\vec3.h>
+#include <MathsLib\Containers\vec4.h>
+#include <MathsLib\Containers\mat4.h>
+
+using Maths::Containers::vec3;
+using Maths::Containers::vec4;
+using Maths::Containers::mat4;
 
 namespace Components {
 
@@ -21,24 +25,24 @@ namespace Components {
 
 		void Init() override;
 
-		void SetPosition(vec3 pos);
-		void SetScale(vec3 scale);
-		void SetRotation(vec3 rotation);
+		void SetPosition(vec3<float> pos);
+		void SetScale(vec3<float> scale);
+		void SetRotation(vec3<float> rotation);
 		void SetTransOrder(TransformationOrder order);
 
-		const vec3& GetPosition() const;
-		const vec3& GetScale() const;
-		const vec3& GetRotation() const;
+		const vec3<float>& GetPosition() const;
+		const vec3<float>& GetScale() const;
+		const vec3<float>& GetRotation() const;
 		TransformationOrder GetTransOrder() const;
-		const mat4& GetModelMatrix();
+		const mat4<float>& GetModelMatrix();
 	private:
 		void CalculateModelMatrix();
 	private:
-		vec3 m_Position = vec3(0.0f, 0.0f, 0.0f);
-		vec3 m_Scale = vec3(1.0f, 1.0f, 1.0f);
-		vec3 m_Rotation = vec3(0.0f, 0.0f, 0.0f);
+		vec3<float> m_Position = vec3<float>(0.0f, 0.0f, 0.0f);
+		vec3<float> m_Scale = vec3<float>(1.0f, 1.0f, 1.0f);
+		vec3<float> m_Rotation = vec3<float>(0.0f, 0.0f, 0.0f);
 		TransformationOrder m_TransOrder = TransformationOrder::Translation_Scale_Rotation;	
-		mat4 m_ModelMatrix;
+		mat4<float> m_ModelMatrix;
 	};
 
 }

@@ -1,6 +1,6 @@
 #include "ElementBuffer.h"
 
-namespace Resources { namespace Buffers {
+namespace Resources::Buffers {
 
 	ElementBuffer::ElementBuffer(unsigned int count, const std::string& RUID) : Buffer(count * sizeof(ELEMENT_BUFFER_DATA_TYPE), RUID)
 	{
@@ -41,4 +41,4 @@ namespace Resources { namespace Buffers {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
-} }
+}

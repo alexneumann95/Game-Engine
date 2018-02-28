@@ -38,7 +38,7 @@ namespace Resources {
 		return static_cast<unsigned int>(m_Indices.size());
 	}
 
-	const std::string& const Model::GetTextureFileName() const
+	const std::string& Model::GetTextureFileName() const
 	{
 		return m_TextureFile;
 	}
@@ -53,9 +53,9 @@ namespace Resources {
 		}
 
 		std::string identifier = "";
-		std::vector<Maths::vec3> positions;
-		std::vector<Maths::vec4> colours;
-		std::vector<Maths::vec2> texCoords;
+		std::vector<vec3<float>> positions;
+		std::vector<vec4<float>> colours;
+		std::vector<vec2<float>> texCoords;
 
 		while (!file.eof())
 		{	
@@ -65,19 +65,19 @@ namespace Resources {
 			{
 				float x, y, z;
 				file >> x; file >> y; file >> z;
-				positions.push_back(Maths::vec3(x, y, z));
+				positions.push_back(vec3<float>(x, y, z));
 			}
 			else if (identifier == "c")
 			{
 				float x, y, z, w;
 				file >> x; file >> y; file >> z; file >> w;
-				colours.push_back(Maths::vec4(x, y, z, w));
+				colours.push_back(vec4<float>(x, y, z, w));
 			}
 			else if (identifier == "t")
 			{
 				float x, y;
 				file >> x; file >> y;
-				texCoords.push_back(Maths::vec2(x, y));
+				texCoords.push_back(vec2<float>(x, y));
 			}
 			else if (identifier == "i")
 			{

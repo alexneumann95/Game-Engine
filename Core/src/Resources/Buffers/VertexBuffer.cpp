@@ -1,6 +1,6 @@
 #include "VertexBuffer.h"
 
-namespace Resources { namespace Buffers {
+namespace Resources::Buffers {
 
 	VertexBuffer::VertexBuffer(unsigned int bufferSize, const std::string& RUID) : Buffer(bufferSize, RUID)
 	{
@@ -67,4 +67,4 @@ namespace Resources { namespace Buffers {
 		UnbindVAO();
 	}
 
-} }
+}

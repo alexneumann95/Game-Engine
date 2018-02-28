@@ -2,7 +2,7 @@
 
 #include "Buffer.h"
 
-namespace Resources { namespace Buffers {
+namespace Resources::Buffers {
 
 	class GE_API VertexBuffer final : public Buffer
 	{
@@ -23,4 +23,4 @@ namespace Resources { namespace Buffers {
 		unsigned int m_VertexArrayObject = 0;
 	};
 
-} }
+}

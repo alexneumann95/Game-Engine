@@ -1,6 +1,6 @@
 #include "Buffer.h"
 
-namespace Resources { namespace Buffers {
+namespace Resources::Buffers {
 
 	Buffer::Buffer(unsigned int bufferSize, const std::string& RUID) : Resource(RUID), m_Size(bufferSize)
 	{
@@ -28,4 +28,4 @@ namespace Resources { namespace Buffers {
 		glNamedBufferStorage(m_BufferObject, m_Size, nullptr, GL_DYNAMIC_STORAGE_BIT);
 	}
 
-} }
+}
