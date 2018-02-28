@@ -14,15 +14,12 @@ namespace Components {
 		void Init() override;
 
 		const std::string& GetModelRUID() const;
-		const std::string& GetTextureRUID() const;
-		Resources::Model* const GetModel() const;
-		Resources::Texture* const GetTexture() const;
+		// Returns the texture RUID for each mesh in order (e.g. first textureRUID corresponds to first meshes' textureRUID)
+		const std::vector<std::string>& GetMeshesTextureRUIDS() const;
 	private:
 		std::string m_ModelFile = "";
 		std::string m_ModelRUID = "";
-		std::string m_TextureRUID = "";
-		Resources::Model* m_pModel = nullptr; // Pointer to the model object in the Resource Manager
-		Resources::Texture* m_pTexture = nullptr; // Pointer to the texture in the Resource Manager
+		std::vector<std::string> m_MeshesTextureRUIDS;
 	};
 
 }

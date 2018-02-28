@@ -1,6 +1,7 @@
 #include "RenderManager.h"
 #include "ShaderManager.h"
 #include "EntityManager.h"
+#include "ResourceManager.h"
 #include "..\App\GameWindow.h"
 
 
@@ -42,22 +43,42 @@ namespace Managers {
 		{
 			Entities::GameObject* pGameObject = iter.second;
 
-			pGameObject->GetRenderComp()->GetVertexBuffer()->BindVAO();
-			pGameObject->GetRenderComp()->GetElementBuffer()->BindEBO();
-			pGameObject->GetModelComp()->GetTexture()->Bind();
+			// Get RUIDs for all required resources
+			auto vbRUID = pGameObject->GetRenderComp()->GetVertexBufferRUID();
+			auto ebRUID = pGameObject->GetRenderComp()->GetElementBufferRUID();
+			auto modelRUID = pGameObject->GetModelComp()->GetModelRUID();
+			auto meshesTextureRUIDS = pGameObject->GetModelComp()->GetMeshesTextureRUIDS();
 
-			mat4<float> modelMatrix = pGameObject->GetTransformComp()->GetModelMatrix();
-			SHADER_MANAGER->GetShader()->SetUniform("vModel", modelMatrix);
+			// Bind buffers
+			RESOURCE_MANAGER->GetVertexBuffer(vbRUID)->BindVAO();
+			RESOURCE_MANAGER->GetElementBuffer(ebRUID)->BindEBO();
+
+			// Set camera uniforms
 			mat4<float> viewMatrix = ENTITY_MANAGER->GetActiveCamera()->GetViewMatrix();
 			SHADER_MANAGER->GetShader()->SetUniform("vView", viewMatrix);
 			mat4<float> projMatrix = ENTITY_MANAGER->GetActiveCamera()->GetPerspectiveMatrix();
-			SHADER_MANAGER->GetShader()->SetUniform("vProj", projMatrix);	
+			SHADER_MANAGER->GetShader()->SetUniform("vProj", projMatrix);
 
-			glDrawElements(GL_TRIANGLES, pGameObject->GetModelComp()->GetModel()->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
+			// Draw each mesh
+			unsigned int indicesOffset = 0;
+			unsigned int meshNo = 0;
+			for (auto& mesh : RESOURCE_MANAGER->GetModel(modelRUID)->GetMeshes())
+			{
+				RESOURCE_MANAGER->GetTexture(meshesTextureRUIDS[meshNo])->Bind();
 
-			pGameObject->GetModelComp()->GetTexture()->Unbind();
-			pGameObject->GetRenderComp()->GetElementBuffer()->UnbindEBO();
-			pGameObject->GetRenderComp()->GetVertexBuffer()->UnbindVAO();	
+				mat4<float> modelMatrix = pGameObject->GetTransformComp()->GetModelMatrix();
+				SHADER_MANAGER->GetShader()->SetUniform("vModel", modelMatrix);
+
+				glDrawElements(GL_TRIANGLES, mesh.GetNumIndices(), GL_UNSIGNED_INT, (const void*)(indicesOffset * sizeof(ELEMENT_BUFFER_DATA_TYPE)));
+				indicesOffset += mesh.GetNumIndices();
+
+				RESOURCE_MANAGER->GetTexture(meshesTextureRUIDS[meshNo])->Unbind();
+				meshNo += 1;
+			}
+			
+			// Unbind buffers
+			RESOURCE_MANAGER->GetElementBuffer(ebRUID)->UnbindEBO();
+			RESOURCE_MANAGER->GetVertexBuffer(vbRUID)->UnbindVAO();
 		}
 	}
 

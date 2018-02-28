@@ -178,6 +178,7 @@
     <ClCompile Include="src\Entities\Camera.cpp" />
     <ClCompile Include="src\Entities\Entity.cpp" />
     <ClCompile Include="src\Entities\GameObject.cpp" />
+    <ClCompile Include="src\Graphics\Mesh.cpp" />
     <ClCompile Include="src\Graphics\Shader.cpp" />
     <ClCompile Include="src\Managers\EntityManager.cpp" />
     <ClCompile Include="src\Managers\EUID.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="src\Entities\Camera.h" />
     <ClInclude Include="src\Entities\Entity.h" />
     <ClInclude Include="src\Entities\GameObject.h" />
+    <ClInclude Include="src\Graphics\Mesh.h" />
     <ClInclude Include="src\Graphics\Shader.h" />
     <ClInclude Include="src\Graphics\Vertex.h" />
     <ClInclude Include="src\Managers\EntityManager.h" />

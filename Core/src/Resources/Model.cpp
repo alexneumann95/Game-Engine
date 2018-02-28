@@ -18,29 +18,30 @@ namespace Resources {
 		LoadModelData();
 	}
 
-	const std::vector<Graphics::Vertex>& Model::GetVertices() const
+	const std::vector<Graphics::Mesh>& Model::GetMeshes() const
 	{
-		return m_Vertices;
+		return m_Meshes;
 	}
 
-	const std::vector<ELEMENT_BUFFER_DATA_TYPE>& Model::GetIndices() const
+	int Model::GetNumMeshes() const
 	{
-		return m_Indices;
+		return static_cast<int>(m_Meshes.size());
 	}
 
-	unsigned int Model::GetNumVertices() const
+	unsigned int Model::GetModelVertexByteSize() const
 	{
-		return static_cast<unsigned int>(m_Vertices.size());
+		unsigned int size = 0;
+		for (auto& mesh : m_Meshes)
+			size += mesh.GetNumVertices() * sizeof(Graphics::Vertex);
+		return size;
 	}
 
-	unsigned int Model::GetNumIndices() const
+	unsigned int Model::GetModelIndicesCount() const
 	{
-		return static_cast<unsigned int>(m_Indices.size());
-	}
-
-	const std::string& Model::GetTextureFileName() const
-	{
-		return m_TextureFile;
+		unsigned int count = 0;
+		for (auto& mesh : m_Meshes)
+			count += mesh.GetNumIndices();
+		return count;
 	}
 
 	void Model::LoadModelData()
@@ -53,58 +54,24 @@ namespace Resources {
 		}
 
 		std::string identifier = "";
-		std::vector<vec3<float>> positions;
-		std::vector<vec4<float>> colours;
-		std::vector<vec2<float>> texCoords;
 
 		while (!file.eof())
-		{	
+		{
 			file >> identifier;
-
-			if (identifier == "v")
+			if (identifier == "m")
 			{
-				float x, y, z;
-				file >> x; file >> y; file >> z;
-				positions.push_back(vec3<float>(x, y, z));
-			}
-			else if (identifier == "c")
-			{
-				float x, y, z, w;
-				file >> x; file >> y; file >> z; file >> w;
-				colours.push_back(vec4<float>(x, y, z, w));
-			}
-			else if (identifier == "t")
-			{
-				float x, y;
-				file >> x; file >> y;
-				texCoords.push_back(vec2<float>(x, y));
-			}
-			else if (identifier == "i")
-			{
-				ELEMENT_BUFFER_DATA_TYPE index;
-				for (int i = 0; i < 3; ++i)
-				{
-					file >> index;
-					m_Indices.push_back(index);
-				}
-			}
-			else if (identifier == "tf")
-			{
-				file >> m_TextureFile;
+				std::string name;
+				file >> name;
+				Graphics::Mesh mesh(name);
+				file >> mesh;
+				m_Meshes.push_back(mesh);
 			}
 			else
-				LogError("Unknown identifier read in: " + m_ModelFile);
-
+			{
+				LogError("Unknown identifer! Did not find mesh start...");
+				return;
+			}
 		}
-
-		if (positions.size() != colours.size() || positions.size() != texCoords.size())
-		{
-			LogError("Data file is incomplete! (" + m_ModelFile + ")");
-			return;
-		}
-
-		for (int i = 0; i < positions.size(); ++i)
-			m_Vertices.push_back(Graphics::Vertex(positions[i], colours[i], texCoords[i]));
 
 		file.close();
 	}
