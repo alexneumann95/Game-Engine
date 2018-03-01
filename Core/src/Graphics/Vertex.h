@@ -15,10 +15,11 @@ namespace Graphics {
 	struct GE_API Vertex
 	{
 		vec3<float> Position;
+		vec3<float> Normal;
 		vec4<float> Colour;
 		vec2<float> TexCoord;
 
-		Vertex(const vec3<float>& pos, const vec4<float>& colour, const vec2<float>& texCoord) : Position(pos), Colour(colour), TexCoord(texCoord)
+		Vertex(const vec3<float>& pos, const vec3<float>& normal, const vec4<float>& colour, const vec2<float>& texCoord) : Position(pos), Normal(normal), Colour(colour), TexCoord(texCoord)
 		{
 
 		}

@@ -12,17 +12,17 @@ namespace Components {
 		m_ModelMatrix = mat4<float>::Identity();
 	}
 
-	void TransformComponent::SetPosition(vec3<float> pos)
+	void TransformComponent::SetPosition(const vec3<float>& pos)
 	{
 		m_Position = pos;
 	}
 
-	void TransformComponent::SetScale(vec3<float> scale)
+	void TransformComponent::SetScale(const vec3<float>& scale)
 	{
 		m_Scale = scale;
 	}
 
-	void TransformComponent::SetRotation(vec3<float> rotation)
+	void TransformComponent::SetRotation(const vec3<float>& rotation)
 	{
 		m_Rotation = rotation;
 	}

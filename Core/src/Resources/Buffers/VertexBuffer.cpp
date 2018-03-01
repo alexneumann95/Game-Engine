@@ -56,12 +56,14 @@ namespace Resources::Buffers {
 		BindVAO();
 		BindVBO();
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, false, 9 * sizeof(float), 0);
-		glVertexAttribPointer(1, 4, GL_FLOAT, false, 9 * sizeof(float), (const void*)(3 * sizeof(float)));
-		glVertexAttribPointer(2, 2, GL_FLOAT, false, 9 * sizeof(float), (const void*)(7 * sizeof(float)));
+		glVertexAttribPointer(0, 3, GL_FLOAT, false, 12 * sizeof(float), 0);
+		glVertexAttribPointer(1, 3, GL_FLOAT, false, 12 * sizeof(float), (const void*)(3 * sizeof(float)));
+		glVertexAttribPointer(2, 4, GL_FLOAT, false, 12 * sizeof(float), (const void*)(6 * sizeof(float)));
+		glVertexAttribPointer(3, 2, GL_FLOAT, false, 12 * sizeof(float), (const void*)(10 * sizeof(float)));
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 		glEnableVertexAttribArray(2);
+		glEnableVertexAttribArray(3);
 
 		UnbindVBO();
 		UnbindVAO();

@@ -2,7 +2,7 @@
 
 namespace Entities {
 
-	Entity::Entity(const std::string& EUID) : m_EUID(EUID)
+	Entity::Entity(const std::string& EUID, EntityType type) : m_EUID(EUID), m_Type(type)
 	{
 
 	}
@@ -10,6 +10,11 @@ namespace Entities {
 	const std::string& Entity::GetEUID() const
 	{
 		return m_EUID;
+	}
+
+	EntityType Entity::GetType() const
+	{
+		return m_Type;	
 	}
 
 }

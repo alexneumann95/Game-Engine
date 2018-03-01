@@ -18,103 +18,70 @@ namespace Managers {
 	bool EntityManager::Start()
 	{
 		// Create a default camera
-		std::string camID = AddCamera(Camera());
-		SetActiveCamera(camID);
+		SetActiveCamera(AddEntity(Camera()));
 
 		return true;
 	}
 
 	bool EntityManager::Stop()
 	{
-		for (auto iter : m_GameObjects)
+		for (auto iter : m_Entities)
 			delete iter.second;
-		m_GameObjects.clear();
-
-		for (auto iter : m_Cameras)
-			delete iter.second;
-		m_Cameras.clear();
+		m_Entities.clear();
 
 		return true;
 	}
 
 	void EntityManager::Update()
 	{
-		for (auto iter : m_GameObjects)
-			iter.second->Update();
-
-		for (auto iter : m_Cameras)
+		for (auto iter : m_Entities)
 			iter.second->Update();
 	}
 
-	const GameObjectsMap& EntityManager::GetGameObjects() const
+	const EntitiesMap& EntityManager::GetEntities() const
 	{
-		return m_GameObjects;
+		return m_Entities;
 	}
 
 	void EntityManager::SetActiveCamera(const std::string& EUID)
 	{
-		if (CheckCameraExists(EUID))
+		if (CheckEntityExists(EUID) && m_Entities.find(EUID)->second->GetType() == EntityType::CAMERA)
 			m_ActiveCameraEUID = EUID;
+		else
+			LogError("Camera is not found!");
 	}
 
 	Camera* const EntityManager::GetActiveCamera() const
 	{
-		return m_Cameras.find(m_ActiveCameraEUID)->second;
+		return dynamic_cast<Camera*>(m_Entities.find(m_ActiveCameraEUID)->second);
 	}
 
-	const std::string& EntityManager::AddGameObject(const GameObject& object)
+	const std::string& EntityManager::AddEntity(const Entity& entity)
 	{
-		if (CheckGameObjectExists(object.GetEUID()))
-			return m_GameObjects.find(object.GetEUID())->first;
+		if (CheckEntityExists(entity.GetEUID()))
+			return m_Entities.find(entity.GetEUID())->first;
 
-		std::pair<GameObjectsMap::iterator, bool> result = m_GameObjects.insert(std::pair<std::string, GameObject*>(object.GetEUID(), object.Clone()));
+		std::pair<EntitiesMap::iterator, bool> result = m_Entities.insert(std::pair<std::string, Entity*>(entity.GetEUID(), entity.Clone()));
 		result.first->second->Start();
-		result.first->second->InitComponents();
+		if (entity.GetType() == EntityType::GAME_OBJECT)
+			dynamic_cast<GameObject*>(result.first->second)->InitComponents();
 		return result.first->first;
 	}
 
-	const std::string& EntityManager::AddCamera(const Camera& cam)
+	bool EntityManager::CheckEntityExists(const std::string& EUID)
 	{
-		if (CheckCameraExists(cam.GetEUID()))
-			return m_Cameras.find(cam.GetEUID())->first;
-
-		std::pair<CamerasMap::iterator, bool> result = m_Cameras.insert(std::pair<std::string, Camera*>(cam.GetEUID(), cam.Clone()));
-		result.first->second->Start();
-		return result.first->first;
+		auto iter = m_Entities.find(EUID);
+		return (iter != m_Entities.end()) ? true : false;
 	}
 
-	bool EntityManager::CheckGameObjectExists(const std::string& EUID)
+	bool EntityManager::DestroyEntity(const std::string& EUID)
 	{
-		auto iter = m_GameObjects.find(EUID);
-		return (iter != m_GameObjects.end()) ? true : false;
-	}
-
-	bool EntityManager::CheckCameraExists(const std::string& EUID)
-	{
-		auto iter = m_Cameras.find(EUID);
-		return (iter != m_Cameras.end()) ? true : false;
-	}
-
-	bool EntityManager::DestroyGameObject(const std::string& EUID)
-	{
-		if (!CheckGameObjectExists(EUID))
+		if (!CheckEntityExists(EUID))
 			return false;
 
-		auto iter = m_GameObjects.find(EUID);
+		auto iter = m_Entities.find(EUID);
 		delete iter->second;
-		m_GameObjects.erase(iter);
-
-		return true;
-	}
-
-	bool EntityManager::DestroyCamera(const std::string& EUID)
-	{
-		if (!CheckCameraExists(EUID))
-			return false;
-
-		auto iter = m_Cameras.find(EUID);
-		delete iter->second;
-		m_Cameras.erase(iter);
+		m_Entities.erase(iter);
 
 		return true;
 	}

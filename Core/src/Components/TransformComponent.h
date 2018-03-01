@@ -25,9 +25,9 @@ namespace Components {
 
 		void Init() override;
 
-		void SetPosition(vec3<float> pos);
-		void SetScale(vec3<float> scale);
-		void SetRotation(vec3<float> rotation);
+		void SetPosition(const vec3<float>& pos);
+		void SetScale(const vec3<float>& scale);
+		void SetRotation(const vec3<float>& rotation);
 		void SetTransOrder(TransformationOrder order);
 
 		const vec3<float>& GetPosition() const;

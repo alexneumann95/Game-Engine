@@ -51,6 +51,7 @@ namespace Graphics {
 	{
 		std::vector<vec2<float>> texCoords;
 		std::vector<vec3<float>> positions;
+		std::vector<vec3<float>> normals;
 		std::vector<vec4<float>> colours;
 		std::vector<ELEMENT_BUFFER_DATA_TYPE> indices;
 
@@ -62,6 +63,12 @@ namespace Graphics {
 				float x, y, z;
 				is >> x; is >> y; is >> z;
 				positions.emplace_back(x, y, z);
+			}
+			else if (identifier == "n")
+			{
+				float x, y, z;
+				is >> x; is >> y; is >> z;
+				normals.emplace_back(x, y, z);
 			}
 			else if (identifier == "c")
 			{
@@ -91,10 +98,10 @@ namespace Graphics {
 			}
 		}
 
-		if (texCoords.size() == positions.size() && positions.size() == colours.size() && indices.size() != 0)
+		if (texCoords.size() == positions.size() && positions.size() == normals.size() && normals.size() == colours.size() && indices.size() != 0)
 		{
 			for (int i = 0; i < positions.size(); i++)
-				mesh.m_Vertices.push_back(Graphics::Vertex(positions[i], colours[i], texCoords[i]));
+				mesh.m_Vertices.push_back(Graphics::Vertex(positions[i], normals[i], colours[i], texCoords[i]));
 			for (int i = 0; i < indices.size(); i++)
 				mesh.m_Indices.push_back(indices[i]);
 		}

@@ -39,9 +39,11 @@ namespace Managers {
 	{
 		SHADER_MANAGER->GetShader()->Use();
 
-		for (auto iter : EntityManager::Instance()->GetGameObjects())
+		for (auto iter : EntityManager::Instance()->GetEntities())
 		{
-			Entities::GameObject* pGameObject = iter.second;
+			if (iter.second->GetType() != EntityType::GAME_OBJECT) continue;
+			
+			Entities::GameObject* pGameObject = dynamic_cast<GameObject*>(iter.second);
 
 			// Get RUIDs for all required resources
 			auto vbRUID = pGameObject->GetRenderComp()->GetVertexBufferRUID();

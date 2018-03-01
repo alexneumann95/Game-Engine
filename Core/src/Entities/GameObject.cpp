@@ -3,12 +3,12 @@
 
 namespace Entities {
 
-	GameObject::GameObject(const std::string& EUID) : Entity(EUID)
+	GameObject::GameObject(const std::string& EUID) : Entity(EUID, EntityType::GAME_OBJECT)
 	{
 
 	}
 
-	GameObject::GameObject(const GameObject& other) : Entity(other.GetEUID())
+	GameObject::GameObject(const GameObject& other) : Entity(other.GetEUID(), EntityType::GAME_OBJECT)
 	{
 		m_pTransformComp = new TransformComponent(this); // Every game object has a transform component (when added to the entity manager)
 	}
