@@ -4,6 +4,7 @@
 
 #include <MathsLib\Containers\mat3.h>
 #include <MathsLib\Containers\mat4.h>
+#include <MathsLib\Containers\vec3.h>
 #include <glad\glad.h>
 #include <vector>
 #include <fstream>
@@ -11,6 +12,7 @@
 
 using Maths::Containers::mat3;
 using Maths::Containers::mat4;
+using Maths::Containers::vec3;
 
 namespace Graphics {
 
@@ -37,6 +39,7 @@ namespace Graphics {
 		void SetUniform(const std::string& name, int value);
 		void SetUniform(const std::string& name, const mat3<float>& matrix);
 		void SetUniform(const std::string& name, const mat4<float>& matrix);
+		void SetUniform(const std::string& name, const vec3<float>& vector);
 	private:
 		void CreateShaderProgram();
 		void GetShaderSource(const std::string& file, std::string& source);

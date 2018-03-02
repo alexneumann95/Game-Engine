@@ -29,7 +29,7 @@ namespace Entities {
 		if (m_ComponentsInitialised)
 			return;
 
-		auto InitComponent = [&](Components::Component* const pComponent) {
+		auto InitComponent = [](Components::Component* const pComponent) {
 			if (pComponent != nullptr)
 				pComponent->Init();
 		};

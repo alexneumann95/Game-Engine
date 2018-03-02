@@ -39,12 +39,8 @@ namespace Managers {
 	{
 		SHADER_MANAGER->GetShader()->Use();
 
-		for (auto iter : EntityManager::Instance()->GetEntities())
+		for (auto* pGameObject : ENTITY_MANAGER->GetEntities<Entities::GameObject>())
 		{
-			if (iter.second->GetType() != Entities::EntityType::GAME_OBJECT) continue;
-			
-			Entities::GameObject* pGameObject = dynamic_cast<Entities::GameObject*>(iter.second);
-
 			// Get RUIDs for all required resources
 			auto vbRUID = pGameObject->GetComponent<Components::CRender>()->GetVertexBufferRUID();
 			auto ebRUID = pGameObject->GetComponent<Components::CRender>()->GetElementBufferRUID();
@@ -58,27 +54,44 @@ namespace Managers {
 			// Set camera uniforms
 			mat4<float> viewMatrix = ENTITY_MANAGER->GetActiveCamera()->GetViewMatrix();
 			mat4<float> projMatrix = ENTITY_MANAGER->GetActiveCamera()->GetPerspectiveMatrix();
+			mat4<float> modelMatrix = pGameObject->GetComponent<Components::CTransform>()->GetModelMatrix();
+			SHADER_MANAGER->GetShader()->SetUniform("vMVPMatrix", projMatrix * viewMatrix * modelMatrix);
+
+			// Set light uniforms
+			SHADER_MANAGER->GetShader()->SetUniform("vNormalMatrix", mat3<float>::Transpose(mat3<float>::Inverse(modelMatrix)));
+			SHADER_MANAGER->GetShader()->SetUniform("fViewPos", ENTITY_MANAGER->GetActiveCamera()->GetPosition());
+			ApplyLighting();
 
 			// Draw each mesh
 			unsigned int indicesOffset = 0;
-			unsigned int meshNo = 0;
+			unsigned int meshNum = 0;
 			for (auto& mesh : RESOURCE_MANAGER->GetModel(modelRUID)->GetMeshes())
 			{
-				RESOURCE_MANAGER->GetTexture(meshesTextureRUIDS[meshNo])->Bind();
-
-				mat4<float> modelMatrix = pGameObject->GetComponent<Components::CTransform>()->GetModelMatrix();
-				SHADER_MANAGER->GetShader()->SetUniform("vMVPMatrix", projMatrix * viewMatrix * modelMatrix);
+				RESOURCE_MANAGER->GetTexture(meshesTextureRUIDS[meshNum])->Bind();
 
 				glDrawElements(GL_TRIANGLES, mesh.GetNumIndices(), GL_UNSIGNED_INT, (const void*)(indicesOffset * sizeof(ELEMENT_BUFFER_DATA_TYPE)));
 				indicesOffset += mesh.GetNumIndices();
 
-				RESOURCE_MANAGER->GetTexture(meshesTextureRUIDS[meshNo])->Unbind();
-				meshNo += 1;
+				RESOURCE_MANAGER->GetTexture(meshesTextureRUIDS[meshNum])->Unbind();
+				meshNum += 1;
 			}
 			
 			// Unbind buffers
 			RESOURCE_MANAGER->GetElementBuffer(ebRUID)->UnbindEBO();
 			RESOURCE_MANAGER->GetVertexBuffer(vbRUID)->UnbindVAO();
+		}
+	}
+
+	void RenderManager::ApplyLighting() const
+	{
+		int lightNum = 0;
+		for (auto* pDirLight : ENTITY_MANAGER->GetEntities<Entities::Lights::DirectionalLight>())
+		{
+			SHADER_MANAGER->GetShader()->SetUniform("fDirLights[" + std::to_string(lightNum) + "].Direction", pDirLight->GetDirection());
+			SHADER_MANAGER->GetShader()->SetUniform("fDirLights[" + std::to_string(lightNum) + "].Ambient", pDirLight->GetAmbient());
+			SHADER_MANAGER->GetShader()->SetUniform("fDirLights[" + std::to_string(lightNum) + "].Diffuse", pDirLight->GetDiffuse());
+			SHADER_MANAGER->GetShader()->SetUniform("fDirLights[" + std::to_string(lightNum) + "].Specular", pDirLight->GetSpecular());
+			lightNum += 1;
 		}
 	}
 

@@ -2,13 +2,8 @@
 
 namespace Entities::Lights {
 
-	DirectionalLight::DirectionalLight() : Entity(Managers::NextDirectionalLightEUID(), EntityType::DIRECTIONAL_LIGHT)
-	{
-
-	}
-
-	DirectionalLight::DirectionalLight(const vec3<float>& direction, const vec3<float>& colour, const std::string& EUID) :
-		Entity(EUID, EntityType::DIRECTIONAL_LIGHT), m_Direction(direction), m_Colour(colour)
+	DirectionalLight::DirectionalLight(const vec3<float>& direction, const vec3<float>& ambient, const vec3<float>& diffuse, const vec3<float>& specular) :
+		Entity(Managers::NextDirectionalLightEUID(), EntityType::DIRECTIONAL_LIGHT), m_Direction(direction), m_Ambient(ambient), m_Diffuse(diffuse), m_Specular(specular)
 	{
 
 	}
@@ -24,9 +19,19 @@ namespace Entities::Lights {
 			m_Direction = direction;
 	}
 
-	void DirectionalLight::SetColour(const vec3<float>& colour)
+	void DirectionalLight::SetAmbient(const vec3<float>& value)
 	{
-		m_Colour = colour;
+		m_Ambient = value;
+	}
+
+	void DirectionalLight::SetDiffuse(const vec3<float>& value)
+	{
+		m_Diffuse = value;
+	}
+
+	void DirectionalLight::SetSpecular(const vec3<float>& value)
+	{
+		m_Specular = value;
 	}
 
 	const vec3<float>& DirectionalLight::GetDirection() const
@@ -34,9 +39,19 @@ namespace Entities::Lights {
 		return m_Direction;
 	}
 
-	const vec3<float>& DirectionalLight::GetColour() const
+	const vec3<float>& DirectionalLight::GetAmbient() const
 	{
-		return m_Colour;
+		return m_Ambient;
+	}
+
+	const vec3<float>& DirectionalLight::GetDiffuse() const
+	{
+		return m_Diffuse;
+	}
+
+	const vec3<float>& DirectionalLight::GetSpecular() const
+	{
+		return m_Specular;
 	}
 
 }

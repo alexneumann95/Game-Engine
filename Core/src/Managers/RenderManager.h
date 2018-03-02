@@ -21,6 +21,8 @@ namespace Managers {
 
 		void Draw();
 	private:
+		void ApplyLighting() const;
+	private:
 		static RenderManager* m_pInstance;
 	};
 

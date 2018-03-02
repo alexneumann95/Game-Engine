@@ -56,6 +56,14 @@ namespace App {
 		glfwSetWindowTitle(m_pWindow, title.c_str());
 	}
 
+	void GameWindow::SetClearColour(float r, float g, float b, float a)
+	{
+		m_ClearColour[0] = r;
+		m_ClearColour[1] = g;
+		m_ClearColour[2] = b;
+		m_ClearColour[3] = a;
+	}
+
 	GLFWwindow* const GameWindow::GetGLFWWindow() const
 	{
 		return m_pWindow;
@@ -91,7 +99,7 @@ namespace App {
 	void GameWindow::OnRenderFrame()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
+		glClearColor(m_ClearColour[0], m_ClearColour[1], m_ClearColour[2], m_ClearColour[3]);
 
 		RENDER_MANAGER->Draw();
 	}
@@ -151,14 +159,6 @@ namespace App {
 	void GameWindow::SwapBuffers()
 	{
 		glfwSwapBuffers(m_pWindow);
-	}
-
-	void GameWindow::SetClearColor(float r, float g, float b, float a)
-	{
-		m_ClearColor[0] = r;
-		m_ClearColor[1] = g;
-		m_ClearColor[2] = b;
-		m_ClearColor[3] = a;
 	}
 
 }

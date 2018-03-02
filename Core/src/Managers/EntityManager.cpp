@@ -38,11 +38,6 @@ namespace Managers {
 			iter.second->Update();
 	}
 
-	const EntitiesMap& EntityManager::GetEntities() const
-	{
-		return m_Entities;
-	}
-
 	void EntityManager::SetActiveCamera(const std::string& EUID)
 	{
 		if (CheckEntityExists(EUID) && m_Entities.find(EUID)->second->GetType() == Entities::EntityType::CAMERA)
@@ -73,6 +68,19 @@ namespace Managers {
 	{
 		auto iter = m_Entities.find(EUID);
 		return (iter != m_Entities.end()) ? dynamic_cast<Type* const>(iter->second) : nullptr;
+	}
+
+	template <typename Type>
+	const std::vector<Type*> EntityManager::GetEntities()
+	{
+		auto pEntity = dynamic_cast<Entities::Entity*>(&Type());
+		std::vector<Type*> result;
+
+		for (auto entity : m_Entities)
+			if (entity.second->GetType() == pEntity->GetType())
+				result.push_back(dynamic_cast<Type*>(entity.second));
+
+		return result;
 	}
 
 	bool EntityManager::CheckEntityExists(const std::string& EUID)

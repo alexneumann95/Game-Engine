@@ -21,6 +21,7 @@ namespace App {
 		void Terminate();
 		void DisableCursor(bool value = true);
 		void SetTitle(const std::string& title);
+		void SetClearColour(float r, float g, float b, float a);
 
 		GLFWwindow* const GetGLFWWindow() const;
 		int GetHeight() const;
@@ -35,7 +36,6 @@ namespace App {
 		bool Closed();
 		void PollEvents();
 		void SwapBuffers();
-		void SetClearColor(float r, float g, float b, float a);
 	private:
 		static GameWindow* m_pInstance;
 
@@ -43,7 +43,7 @@ namespace App {
 		unsigned int m_Height = 600;
 		std::string m_Title = "Game Window";
 		GLFWwindow* m_pWindow = nullptr;
-		float m_ClearColor[4] = { 0.2f, 0.7f, 0.8f, 1.0f };
+		float m_ClearColour[4] = { 0.95f, 0.95f, 0.95f, 1.0f };
 
 		Utilities::GameTimer m_GameTimer;
 	};

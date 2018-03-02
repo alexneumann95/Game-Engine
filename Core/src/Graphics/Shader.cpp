@@ -38,6 +38,11 @@ namespace Graphics {
 		glUniformMatrix4fv(glGetUniformLocation(m_Program, name.c_str()), 1, GL_FALSE, matrix.Elements);
 	}
 
+	void Shader::SetUniform(const std::string& name, const vec3<float>& vector)
+	{
+		glUniform3f(glGetUniformLocation(m_Program, name.c_str()), vector.X, vector.Y, vector.Z);
+	}
+
 	void Shader::CreateShaderProgram()
 	{
 		m_Program = glCreateProgram();

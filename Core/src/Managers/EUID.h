@@ -3,6 +3,8 @@
 #include "..\Common.h"
 #include <string>
 
+#define MAX_NUM_DIRECTIONAL_LIGHTS 4
+
 namespace Managers {
 
 	GE_API std::string NextGameObjectEUID();

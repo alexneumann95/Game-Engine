@@ -19,7 +19,9 @@ namespace Managers {
 	std::string NextDirectionalLightEUID()
 	{
 		static int nextLightNo = 1;
-		std::string id = "Entities.Light.Directional." + std::to_string(nextLightNo++);
+		std::string id = "Entities.Light.Directional." + std::to_string(nextLightNo);
+		if (nextLightNo < MAX_NUM_DIRECTIONAL_LIGHTS)
+			nextLightNo += 1;
 		return id;
 	}
 
