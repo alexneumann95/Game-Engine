@@ -2,12 +2,14 @@
 
 #include "..\Common.h"
 
+#include <MathsLib\Containers\mat3.h>
 #include <MathsLib\Containers\mat4.h>
 #include <glad\glad.h>
 #include <vector>
 #include <fstream>
 #include <sstream>
 
+using Maths::Containers::mat3;
 using Maths::Containers::mat4;
 
 namespace Graphics {
@@ -33,6 +35,7 @@ namespace Graphics {
 		unsigned int Get() const;
 
 		void SetUniform(const std::string& name, int value);
+		void SetUniform(const std::string& name, const mat3<float>& matrix);
 		void SetUniform(const std::string& name, const mat4<float>& matrix);
 	private:
 		void CreateShaderProgram();

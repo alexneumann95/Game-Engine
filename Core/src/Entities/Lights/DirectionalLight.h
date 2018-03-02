@@ -13,7 +13,7 @@ namespace Entities::Lights {
 	class GE_API DirectionalLight : public Entity
 	{
 	public:
-		DirectionalLight(const std::string& EUID = Managers::NextDirectionalLightEUID());
+		DirectionalLight();
 		DirectionalLight(const vec3<float>& direction, const vec3<float>& colour, const std::string& EUID = Managers::NextDirectionalLightEUID());
 
 		virtual DirectionalLight* Clone() const;

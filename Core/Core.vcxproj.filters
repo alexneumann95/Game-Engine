@@ -24,19 +24,7 @@
     <ClCompile Include="src\Resources\Resource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Resources\Buffers\Buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Resources\Buffers\VertexBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Resources\Buffers\ElementBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Managers\ResourceManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Resources\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Managers\FileManager.cpp">
@@ -63,12 +51,6 @@
     <ClCompile Include="src\Components\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Components\ModelComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\RenderComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Managers\RUID.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -87,13 +69,7 @@
     <ClCompile Include="src\app\GameWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Components\TransformComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Utilities\GameTimer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Resources\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dependencies\includes\stb\stb_image.cpp">
@@ -103,6 +79,30 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Entities\Lights\DirectionalLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\CTransform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\CModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\CRender.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\RTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\RModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Buffers\RBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Buffers\RElementBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Buffers\RVertexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -119,15 +119,6 @@
     <ClInclude Include="src\Resources\Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Resources\Buffers\Buffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Resources\Buffers\VertexBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Resources\Buffers\ElementBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Managers\Manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -135,9 +126,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\EngineControl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Resources\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Managers\FileManager.h">
@@ -170,12 +158,6 @@
     <ClInclude Include="src\Components\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Components\ModelComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\RenderComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Utilities\Errors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -188,13 +170,7 @@
     <ClInclude Include="src\app\GameWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Components\TransformComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Utilities\GameTimer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Resources\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Graphics\Vertex.h">
@@ -207,6 +183,33 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Entities\EntityType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\CTransform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\CModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\CRender.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\RTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\RModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Buffers\RBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Buffers\RElementBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Buffers\RVertexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\ComponentType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

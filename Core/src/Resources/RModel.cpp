@@ -1,34 +1,34 @@
-#include "Model.h"
+#include "RModel.h"
 #include "..\Managers\FileManager.h"
 
 namespace Resources {
 
-	Model::Model(const std::string& file, const std::string& RUID) : Resource(RUID), m_ModelFile(file)
+	RModel::RModel(const std::string& file, const std::string& RUID) : Resource(RUID), m_ModelFile(file)
 	{
 
 	}
 
-	Model::~Model()
+	RModel::~RModel()
 	{
 
 	}
 
-	void Model::Init()
+	void RModel::Init()
 	{
 		LoadModelData();
 	}
 
-	const std::vector<Graphics::Mesh>& Model::GetMeshes() const
+	const std::vector<Graphics::Mesh>& RModel::GetMeshes() const
 	{
 		return m_Meshes;
 	}
 
-	int Model::GetNumMeshes() const
+	int RModel::GetNumMeshes() const
 	{
 		return static_cast<int>(m_Meshes.size());
 	}
 
-	unsigned int Model::GetModelVertexByteSize() const
+	unsigned int RModel::GetModelVertexByteSize() const
 	{
 		unsigned int size = 0;
 		for (auto& mesh : m_Meshes)
@@ -36,7 +36,7 @@ namespace Resources {
 		return size;
 	}
 
-	unsigned int Model::GetModelIndicesCount() const
+	unsigned int RModel::GetModelIndicesCount() const
 	{
 		unsigned int count = 0;
 		for (auto& mesh : m_Meshes)
@@ -44,7 +44,7 @@ namespace Resources {
 		return count;
 	}
 
-	void Model::LoadModelData()
+	void RModel::LoadModelData()
 	{
 		std::ifstream file(FILE_MANAGER->GetExeDirectory() + "models\\" + m_ModelFile);
 		if (file.fail())

@@ -49,7 +49,7 @@ namespace Managers {
 	const std::string& ResourceManager::AddVertexBuffer(unsigned int bufferSize)
 	{
 		std::string RUID = NextVertexBufferRUID();
-		std::pair<VertexBufferMap::iterator, bool> result = m_VertexBuffers.insert(std::pair<std::string, VertexBuffer*>(RUID, new VertexBuffer(bufferSize, RUID)));
+		std::pair<VertexBufferMap::iterator, bool> result = m_VertexBuffers.insert(std::pair<std::string, Resources::Buffers::RVertexBuffer*>(RUID, new Resources::Buffers::RVertexBuffer(bufferSize, RUID)));
 		result.first->second->Init();
 
 		return result.first->first;
@@ -58,7 +58,7 @@ namespace Managers {
 	const std::string& ResourceManager::AddElementBuffer(unsigned int count)
 	{
 		std::string RUID = NextElementBufferRUID();
-		std::pair<ElementBufferMap::iterator, bool> result = m_ElementBuffers.insert(std::pair<std::string, ElementBuffer*>(RUID, new ElementBuffer(count, RUID)));
+		std::pair<ElementBufferMap::iterator, bool> result = m_ElementBuffers.insert(std::pair<std::string, Resources::Buffers::RElementBuffer*>(RUID, new Resources::Buffers::RElementBuffer(count, RUID)));
 		result.first->second->Init();
 		return result.first->first;
 	}
@@ -69,7 +69,7 @@ namespace Managers {
 		if (CheckModelExists(RUID))
 			return m_Models.find(RUID)->first;
 
-		std::pair<ModelMap::iterator, bool> result = m_Models.insert(std::pair<std::string, Model*>(RUID, new Model(file, RUID)));
+		std::pair<ModelMap::iterator, bool> result = m_Models.insert(std::pair<std::string, Resources::RModel*>(RUID, new Resources::RModel(file, RUID)));
 		result.first->second->Init();
 		return result.first->first;
 	}
@@ -80,7 +80,7 @@ namespace Managers {
 		if (CheckTextureExists(RUID))
 			return m_Textures.find(RUID)->first;
 
-		std::pair<TextureMap::iterator, bool> result = m_Textures.insert(std::pair<std::string, Texture*>(RUID, new Texture(file, RUID)));
+		std::pair<TextureMap::iterator, bool> result = m_Textures.insert(std::pair<std::string, Resources::RTexture*>(RUID, new Resources::RTexture(file, RUID)));
 		result.first->second->Init();
 		return result.first->first;
 	}
@@ -105,25 +105,25 @@ namespace Managers {
 		return m_Textures.find(RUID) != m_Textures.end() ? true : false;
 	}
 
-	VertexBuffer* const ResourceManager::GetVertexBuffer(const std::string& RUID)
+	Resources::Buffers::RVertexBuffer* const ResourceManager::GetVertexBuffer(const std::string& RUID)
 	{
 		auto iter = m_VertexBuffers.find(RUID);
 		return iter != m_VertexBuffers.end() ? iter->second : nullptr;
 	}
 
-	ElementBuffer* const ResourceManager::GetElementBuffer(const std::string& RUID)
+	Resources::Buffers::RElementBuffer* const ResourceManager::GetElementBuffer(const std::string& RUID)
 	{
 		auto iter = m_ElementBuffers.find(RUID);
 		return iter != m_ElementBuffers.end() ? iter->second : nullptr;
 	}
 
-	Model* const ResourceManager::GetModel(const std::string& RUID)
+	Resources::RModel* const ResourceManager::GetModel(const std::string& RUID)
 	{
 		auto iter = m_Models.find(RUID);
 		return iter != m_Models.end() ? iter->second : nullptr;
 	}
 
-	Texture* const ResourceManager::GetTexture(const std::string& RUID)
+	Resources::RTexture* const ResourceManager::GetTexture(const std::string& RUID)
 	{
 		auto iter = m_Textures.find(RUID);
 		return iter != m_Textures.end() ? iter->second : nullptr;

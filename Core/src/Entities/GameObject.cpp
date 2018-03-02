@@ -3,21 +3,20 @@
 
 namespace Entities {
 
-	GameObject::GameObject(const std::string& EUID) : Entity(EUID, EntityType::GAME_OBJECT)
+	GameObject::GameObject() : Entity(Managers::NextGameObjectEUID(), EntityType::GAME_OBJECT)
 	{
-
+		
 	}
 
 	GameObject::GameObject(const GameObject& other) : Entity(other.GetEUID(), EntityType::GAME_OBJECT)
 	{
-		m_pTransformComp = new TransformComponent(this); // Every game object has a transform component (when added to the entity manager)
+		AddComponent<Components::CTransform>(); // Every game object has a transform component (when added to the entity manager)
 	}
 
 	GameObject::~GameObject()
 	{
-		delete m_pTransformComp;
-		delete m_pModelComp;
-		delete m_pRenderComp;
+		for (auto* comp : m_Components)
+			delete comp;
 	}
 
 	GameObject* GameObject::Clone() const
@@ -30,42 +29,39 @@ namespace Entities {
 		if (m_ComponentsInitialised)
 			return;
 
-		m_pTransformComp->Init();
+		auto InitComponent = [&](Components::Component* const pComponent) {
+			if (pComponent != nullptr)
+				pComponent->Init();
+		};
 
-		if (m_pModelComp != nullptr)
-			m_pModelComp->Init();
-		if (m_pRenderComp != nullptr)
-			m_pRenderComp->Init();
+		InitComponent(GetComponent<Components::CTransform>());
+		InitComponent(GetComponent<Components::CModel>());
+		InitComponent(GetComponent<Components::CRender>());
 
 		m_ComponentsInitialised = true;
 	}
 
-	void GameObject::AddModelComp(const std::string& modelFile)
+	template <typename Type>
+	void GameObject::AddComponent()
 	{
-		if (m_pModelComp == nullptr)
-			m_pModelComp = new ModelComponent(modelFile, this);
+		if (GetComponent<Type>() == nullptr)
+			m_Components.push_back(new Type(this));
 	}
 
-	void GameObject::AddRenderComp()
+	template <typename Type>
+	Type* const GameObject::GetComponent()
 	{
-		if (m_pRenderComp == nullptr)
-			m_pRenderComp = new RenderComponent(this);
-	}
+		Type* pResult = nullptr;
+		// Create a component class of type "Type" to find out the components enum type
+		auto pComponent = dynamic_cast<Components::Component*>(&Type(this));
 
-	TransformComponent* const GameObject::GetTransformComp() const
-	{
-		return m_pTransformComp;
-	}
+		for (auto* comp : m_Components)
+		{
+			if (comp->GetType() == pComponent->GetType())
+				pResult = dynamic_cast<Type* const>(comp);
+		}
 
-	ModelComponent* const GameObject::GetModelComp() const
-	{
-		return m_pModelComp;
+		return pResult;
 	}
-
-	RenderComponent* const GameObject::GetRenderComp() const
-	{
-		return m_pRenderComp;
-	}
-
 
 }

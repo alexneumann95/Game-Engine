@@ -1,15 +1,15 @@
 #pragma once
 
 #include "Component.h"
-#include "..\Resources\Buffers\VertexBuffer.h"
-#include "..\Resources\Buffers\ElementBuffer.h"
+#include "..\Resources\Buffers\RVertexBuffer.h"
+#include "..\Resources\Buffers\RElementBuffer.h"
 
 namespace Components {
 
-	class GE_API RenderComponent final : public Component
+	class GE_API CRender final : public Component
 	{
 	public:
-		RenderComponent(Entities::GameObject* const pGameObject);
+		CRender(Entities::GameObject* const pGameObject);
 
 		void Init() override;
 

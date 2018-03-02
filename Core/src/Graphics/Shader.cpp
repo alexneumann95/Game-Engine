@@ -28,6 +28,11 @@ namespace Graphics {
 		glUniform1i(glGetUniformLocation(m_Program, name.c_str()), value);
 	}
 
+	void Shader::SetUniform(const std::string& name, const mat3<float>& matrix)
+	{
+		glUniformMatrix3fv(glGetUniformLocation(m_Program, name.c_str()), 1, GL_FALSE, matrix.Elements);
+	}
+
 	void Shader::SetUniform(const std::string& name, const mat4<float>& matrix)
 	{
 		glUniformMatrix4fv(glGetUniformLocation(m_Program, name.c_str()), 1, GL_FALSE, matrix.Elements);

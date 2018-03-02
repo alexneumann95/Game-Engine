@@ -1,17 +1,19 @@
 #pragma once
 
 #include "Component.h"
-#include "..\Resources\Model.h"
-#include "..\Resources\Texture.h"
+#include "..\Resources\RModel.h"
+#include "..\Resources\RTexture.h"
 
 namespace Components {
 
-	class GE_API ModelComponent final : Component
+	class GE_API CModel final : public Component
 	{
 	public:
-		ModelComponent(const std::string& fileName, Entities::GameObject* const pGameObject);
+		CModel(Entities::GameObject* const pGameObject);
 
 		void Init() override;
+
+		void AddModelFile(const std::string& fileName);
 
 		const std::string& GetModelRUID() const;
 		// Returns the texture RUID for each mesh in order (e.g. first textureRUID corresponds to first meshes' textureRUID)

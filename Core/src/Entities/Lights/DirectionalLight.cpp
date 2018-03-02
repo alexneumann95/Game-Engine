@@ -2,7 +2,7 @@
 
 namespace Entities::Lights {
 
-	DirectionalLight::DirectionalLight(const std::string& EUID) : Entity(EUID, EntityType::DIRECTIONAL_LIGHT)
+	DirectionalLight::DirectionalLight() : Entity(Managers::NextDirectionalLightEUID(), EntityType::DIRECTIONAL_LIGHT)
 	{
 
 	}

@@ -1,16 +1,16 @@
 #pragma once
 
-#include "Buffer.h"
+#include "RBuffer.h"
 
 #define ELEMENT_BUFFER_DATA_TYPE unsigned int
 
 namespace Resources::Buffers {
 
-	class GE_API ElementBuffer final : public Buffer
+	class RElementBuffer final : public RBuffer
 	{
 	public:
-		ElementBuffer(unsigned int count, const std::string& RUID);
-		~ElementBuffer();
+		RElementBuffer(unsigned int count, const std::string& RUID);
+		~RElementBuffer();
 
 		void Init() override;
 		void LoadData(unsigned int offsetCount, unsigned int count, const void* pData) override;

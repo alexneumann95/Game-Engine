@@ -7,7 +7,9 @@
 #include "src\Graphics\Vertex.h"
 #include "src\Graphics\Shader.h"
 
-#include "src\Resources\Model.h"
+#include "src\Components\CTransform.h"
+#include "src\Components\CModel.h"
+#include "src\Components\CRender.h"
 
 #include "src\Entities\GameObject.h"
 #include "src\Entities\Camera.h"

@@ -2,19 +2,17 @@
 
 #include "Manager.h"
 #include "RUID.h"
-#include "..\Resources\Buffers\VertexBuffer.h"
-#include "..\Resources\Buffers\ElementBuffer.h"
-#include "..\Resources\Model.h"
-#include "..\Resources\Texture.h"
+#include "..\Resources\Buffers\RVertexBuffer.h"
+#include "..\Resources\Buffers\RElementBuffer.h"
+#include "..\Resources\RModel.h"
+#include "..\Resources\RTexture.h"
 
 #include <map>
-using namespace Resources;
-using namespace Resources::Buffers;
 
-typedef std::map<std::string, VertexBuffer*> VertexBufferMap;
-typedef std::map<std::string, ElementBuffer*> ElementBufferMap;
-typedef std::map<std::string, Model*> ModelMap;
-typedef std::map<std::string, Texture*> TextureMap;
+typedef std::map<std::string, Resources::Buffers::RVertexBuffer*> VertexBufferMap;
+typedef std::map<std::string, Resources::Buffers::RElementBuffer*> ElementBufferMap;
+typedef std::map<std::string, Resources::RModel*> ModelMap;
+typedef std::map<std::string, Resources::RTexture*> TextureMap;
 
 namespace Managers {
 
@@ -38,10 +36,10 @@ namespace Managers {
 		bool CheckModelExists(const std::string& RUID);
 		bool CheckTextureExists(const std::string& RUID);
 
-		VertexBuffer* const GetVertexBuffer(const std::string& RUID);
-		ElementBuffer* const GetElementBuffer(const std::string& RUID);
-		Model* const GetModel(const std::string& RUID);
-		Texture* const GetTexture(const std::string& RUID);
+		Resources::Buffers::RVertexBuffer* const GetVertexBuffer(const std::string& RUID);
+		Resources::Buffers::RElementBuffer* const GetElementBuffer(const std::string& RUID);
+		Resources::RModel* const GetModel(const std::string& RUID);
+		Resources::RTexture* const GetTexture(const std::string& RUID);
 
 		bool DestroyVertexBuffer(const std::string& RUID);
 		bool DestroyElementBuffer(const std::string& RUID);

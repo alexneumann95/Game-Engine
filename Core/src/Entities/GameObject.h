@@ -2,18 +2,19 @@
 
 #include "Entity.h"
 #include "..\Managers\EUID.h"
-#include "..\Components\TransformComponent.h"
-#include "..\Components\ModelComponent.h"
-#include "..\Components\RenderComponent.h"
+#include "..\Components\Component.h"
+#include "..\Components\CTransform.h"
+#include "..\Components\CModel.h"
+#include "..\Components\CRender.h"
 
-using namespace Components;
+#include <list>
 
 namespace Entities {
 
 	class GE_API GameObject : public Entity
 	{
 	public:
-		GameObject(const std::string& EUID = Managers::NextGameObjectEUID());
+		GameObject();
 		GameObject(const GameObject& other);
 		~GameObject();
 
@@ -23,20 +24,24 @@ namespace Entities {
 		void Start() override { }
 		void Update() override { }
 
-		void AddModelComp(const std::string& modelFile);
-		void AddRenderComp();
+		template <typename Type>
+		void AddComponent();
 
-		TransformComponent* const GetTransformComp() const;
-		ModelComponent* const GetModelComp() const;
-		RenderComponent* const GetRenderComp() const;
+		template <typename Type>
+		Type* const GetComponent();
 	private:
 		bool m_ComponentsInitialised = false;
-
-		TransformComponent* m_pTransformComp = nullptr;
-		ModelComponent* m_pModelComp = nullptr;
-		RenderComponent* m_pRenderComp = nullptr;
+		std::list<Components::Component*> m_Components;
 	};
 
 }
 
 #define GAME_OBJECT_CLONE_METHOD(className) virtual Entities::GameObject* Clone() const { return new className(*this); }
+
+template GE_API void Entities::GameObject::AddComponent<Components::CTransform>();
+template GE_API void Entities::GameObject::AddComponent<Components::CModel>();
+template GE_API void Entities::GameObject::AddComponent<Components::CRender>();
+
+template GE_API Components::CTransform* const Entities::GameObject::GetComponent<Components::CTransform>();
+template GE_API Components::CModel* const Entities::GameObject::GetComponent<Components::CModel>();
+template GE_API Components::CRender* const Entities::GameObject::GetComponent<Components::CRender>();

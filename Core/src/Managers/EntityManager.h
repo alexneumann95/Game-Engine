@@ -3,15 +3,12 @@
 #include "Manager.h"
 #include "..\Entities\EntityType.h"
 #include "..\Entities\GameObject.h"
-#include "..\Entities\Camera.h"
 #include "..\Entities\Lights\DirectionalLight.h"
+#include "..\Entities\Camera.h"
 
 #include <map>
 
-using namespace Entities;
-using namespace Lights;
-
-typedef std::map<std::string, Entity*> EntitiesMap;
+typedef std::map<std::string, Entities::Entity*> EntitiesMap;
 
 namespace Managers {
 
@@ -28,9 +25,12 @@ namespace Managers {
 		const EntitiesMap& GetEntities() const;
 
 		void SetActiveCamera(const std::string& EUID);
-		Camera* const GetActiveCamera() const;
+		Entities::Camera* const GetActiveCamera() const;
 
-		const std::string& AddEntity(const Entity& entity);
+		const std::string& AddEntity(const Entities::Entity& entity);
+
+		template <typename Type>
+		Type* const GetEntity(const std::string& EUID);
 
 		bool CheckEntityExists(const std::string& EUID);
 		bool DestroyEntity(const std::string& EUID);
@@ -43,3 +43,7 @@ namespace Managers {
 }
 
 #define ENTITY_MANAGER Managers::EntityManager::Instance()
+
+template GE_API Entities::GameObject* const Managers::EntityManager::GetEntity<Entities::GameObject>(const std::string& EUID);
+template GE_API Entities::Camera* const Managers::EntityManager::GetEntity<Entities::Camera>(const std::string& EUID);
+template GE_API Entities::Lights::DirectionalLight* const Managers::EntityManager::GetEntity<Entities::Lights::DirectionalLight>(const std::string& EUID);

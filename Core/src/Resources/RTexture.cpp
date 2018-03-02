@@ -1,19 +1,19 @@
-#include "Texture.h"
+#include "RTexture.h"
 #include "..\Managers\FileManager.h"
 
 namespace Resources {
 
-	Texture::Texture(const std::string& file, const std::string& RUID) : Resource(RUID), m_File(file)
+	RTexture::RTexture(const std::string& file, const std::string& RUID) : Resource(RUID), m_File(file)
 	{
 
 	}
 
-	Texture::~Texture()
+	RTexture::~RTexture()
 	{
 		glDeleteTextures(1, &m_Texture);
 	}
 
-	void Texture::Init()
+	void RTexture::Init()
 	{
 		glGenTextures(1, &m_Texture);
 		Bind();
@@ -38,13 +38,13 @@ namespace Resources {
 		Unbind();
 	}
 
-	void Texture::Bind(GLenum textureSlot)
+	void RTexture::Bind(GLenum textureSlot)
 	{
 		glActiveTexture(textureSlot);
 		glBindTexture(GL_TEXTURE_2D, m_Texture);
 	}
 
-	void Texture::Unbind()
+	void RTexture::Unbind()
 	{
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}

@@ -171,9 +171,9 @@
     <ClCompile Include="dependencies\includes\stb\stb_image.cpp" />
     <ClCompile Include="src\app\GameWindow.cpp" />
     <ClCompile Include="src\Components\Component.cpp" />
-    <ClCompile Include="src\Components\ModelComponent.cpp" />
-    <ClCompile Include="src\Components\RenderComponent.cpp" />
-    <ClCompile Include="src\Components\TransformComponent.cpp" />
+    <ClCompile Include="src\Components\CModel.cpp" />
+    <ClCompile Include="src\Components\CRender.cpp" />
+    <ClCompile Include="src\Components\CTransform.cpp" />
     <ClCompile Include="src\dllmain.cpp" />
     <ClCompile Include="src\Entities\Camera.cpp" />
     <ClCompile Include="src\Entities\Entity.cpp" />
@@ -189,12 +189,12 @@
     <ClCompile Include="src\Managers\ResourceManager.cpp" />
     <ClCompile Include="src\Managers\RUID.cpp" />
     <ClCompile Include="src\Managers\ShaderManager.cpp" />
-    <ClCompile Include="src\Resources\Buffers\Buffer.cpp" />
-    <ClCompile Include="src\Resources\Buffers\ElementBuffer.cpp" />
-    <ClCompile Include="src\Resources\Buffers\VertexBuffer.cpp" />
-    <ClCompile Include="src\Resources\Model.cpp" />
+    <ClCompile Include="src\Resources\Buffers\RBuffer.cpp" />
+    <ClCompile Include="src\Resources\Buffers\RElementBuffer.cpp" />
+    <ClCompile Include="src\Resources\Buffers\RVertexBuffer.cpp" />
+    <ClCompile Include="src\Resources\RModel.cpp" />
     <ClCompile Include="src\Resources\Resource.cpp" />
-    <ClCompile Include="src\Resources\Texture.cpp" />
+    <ClCompile Include="src\Resources\RTexture.cpp" />
     <ClCompile Include="src\Utilities\Errors.cpp" />
     <ClCompile Include="src\Utilities\GameTimer.cpp" />
   </ItemGroup>
@@ -204,9 +204,10 @@
     <ClInclude Include="src\app\GameWindow.h" />
     <ClInclude Include="src\Common.h" />
     <ClInclude Include="src\Components\Component.h" />
-    <ClInclude Include="src\Components\ModelComponent.h" />
-    <ClInclude Include="src\Components\RenderComponent.h" />
-    <ClInclude Include="src\Components\TransformComponent.h" />
+    <ClInclude Include="src\Components\CModel.h" />
+    <ClInclude Include="src\Components\ComponentType.h" />
+    <ClInclude Include="src\Components\CRender.h" />
+    <ClInclude Include="src\Components\CTransform.h" />
     <ClInclude Include="src\EngineControl.h" />
     <ClInclude Include="src\Entities\Camera.h" />
     <ClInclude Include="src\Entities\Entity.h" />
@@ -225,12 +226,12 @@
     <ClInclude Include="src\Managers\ResourceManager.h" />
     <ClInclude Include="src\Managers\RUID.h" />
     <ClInclude Include="src\Managers\ShaderManager.h" />
-    <ClInclude Include="src\Resources\Buffers\Buffer.h" />
-    <ClInclude Include="src\Resources\Buffers\ElementBuffer.h" />
-    <ClInclude Include="src\Resources\Buffers\VertexBuffer.h" />
-    <ClInclude Include="src\Resources\Model.h" />
+    <ClInclude Include="src\Resources\Buffers\RBuffer.h" />
+    <ClInclude Include="src\Resources\Buffers\RElementBuffer.h" />
+    <ClInclude Include="src\Resources\Buffers\RVertexBuffer.h" />
+    <ClInclude Include="src\Resources\RModel.h" />
     <ClInclude Include="src\Resources\Resource.h" />
-    <ClInclude Include="src\Resources\Texture.h" />
+    <ClInclude Include="src\Resources\RTexture.h" />
     <ClInclude Include="src\Utilities\Errors.h" />
     <ClInclude Include="src\Utilities\GameTimer.h" />
   </ItemGroup>

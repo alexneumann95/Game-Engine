@@ -8,11 +8,11 @@
 
 namespace Resources {
 
-	class GE_API Model final : public Resource
+	class RModel final : public Resource
 	{
 	public:
-		Model(const std::string& file, const std::string& RUID);
-		~Model();
+		RModel(const std::string& file, const std::string& RUID);
+		~RModel();
 
 		void Init() override;
 

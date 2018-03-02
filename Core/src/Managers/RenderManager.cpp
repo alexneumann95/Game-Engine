@@ -41,15 +41,15 @@ namespace Managers {
 
 		for (auto iter : EntityManager::Instance()->GetEntities())
 		{
-			if (iter.second->GetType() != EntityType::GAME_OBJECT) continue;
+			if (iter.second->GetType() != Entities::EntityType::GAME_OBJECT) continue;
 			
-			Entities::GameObject* pGameObject = dynamic_cast<GameObject*>(iter.second);
+			Entities::GameObject* pGameObject = dynamic_cast<Entities::GameObject*>(iter.second);
 
 			// Get RUIDs for all required resources
-			auto vbRUID = pGameObject->GetRenderComp()->GetVertexBufferRUID();
-			auto ebRUID = pGameObject->GetRenderComp()->GetElementBufferRUID();
-			auto modelRUID = pGameObject->GetModelComp()->GetModelRUID();
-			auto meshesTextureRUIDS = pGameObject->GetModelComp()->GetMeshesTextureRUIDS();
+			auto vbRUID = pGameObject->GetComponent<Components::CRender>()->GetVertexBufferRUID();
+			auto ebRUID = pGameObject->GetComponent<Components::CRender>()->GetElementBufferRUID();
+			auto modelRUID = pGameObject->GetComponent<Components::CModel>()->GetModelRUID();
+			auto meshesTextureRUIDS = pGameObject->GetComponent<Components::CModel>()->GetMeshesTextureRUIDS();
 
 			// Bind buffers
 			RESOURCE_MANAGER->GetVertexBuffer(vbRUID)->BindVAO();
@@ -57,9 +57,7 @@ namespace Managers {
 
 			// Set camera uniforms
 			mat4<float> viewMatrix = ENTITY_MANAGER->GetActiveCamera()->GetViewMatrix();
-			SHADER_MANAGER->GetShader()->SetUniform("vView", viewMatrix);
 			mat4<float> projMatrix = ENTITY_MANAGER->GetActiveCamera()->GetPerspectiveMatrix();
-			SHADER_MANAGER->GetShader()->SetUniform("vProj", projMatrix);
 
 			// Draw each mesh
 			unsigned int indicesOffset = 0;
@@ -68,8 +66,8 @@ namespace Managers {
 			{
 				RESOURCE_MANAGER->GetTexture(meshesTextureRUIDS[meshNo])->Bind();
 
-				mat4<float> modelMatrix = pGameObject->GetTransformComp()->GetModelMatrix();
-				SHADER_MANAGER->GetShader()->SetUniform("vModel", modelMatrix);
+				mat4<float> modelMatrix = pGameObject->GetComponent<Components::CTransform>()->GetModelMatrix();
+				SHADER_MANAGER->GetShader()->SetUniform("vMVPMatrix", projMatrix * viewMatrix * modelMatrix);
 
 				glDrawElements(GL_TRIANGLES, mesh.GetNumIndices(), GL_UNSIGNED_INT, (const void*)(indicesOffset * sizeof(ELEMENT_BUFFER_DATA_TYPE)));
 				indicesOffset += mesh.GetNumIndices();

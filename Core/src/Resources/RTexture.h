@@ -6,11 +6,11 @@
 
 namespace Resources {
 
-	class GE_API Texture final : public Resource
+	class RTexture final : public Resource
 	{
 	public:
-		Texture(const std::string& file, const std::string& RUID);
-		~Texture();
+		RTexture(const std::string& file, const std::string& RUID);
+		~RTexture();
 
 		void Init() override;
 

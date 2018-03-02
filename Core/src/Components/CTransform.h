@@ -18,10 +18,10 @@ namespace Components {
 		Translation_Rotation_Scale = 1
 	};
 
-	class GE_API TransformComponent final : public Component
+	class GE_API CTransform final : public Component
 	{
 	public:
-		TransformComponent(Entities::GameObject* const pGameObject);
+		CTransform(Entities::GameObject* const pGameObject);
 
 		void Init() override;
 

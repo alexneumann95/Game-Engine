@@ -1,14 +1,14 @@
-#include "ModelComponent.h"
+#include "CModel.h"
 #include "..\Managers\ResourceManager.h"
 
 namespace Components {
 
-	ModelComponent::ModelComponent(const std::string& file, Entities::GameObject* const pGameObject) : Component(pGameObject), m_ModelFile(file)
+	CModel::CModel(Entities::GameObject* const pGameObject) : Component(pGameObject, ComponentType::MODEL)
 	{
 
 	}
 
-	void ModelComponent::Init()
+	void CModel::Init()
 	{
 		m_ModelRUID = RESOURCE_MANAGER->AddModel(m_ModelFile);
 
@@ -17,12 +17,17 @@ namespace Components {
 			m_MeshesTextureRUIDS.push_back(RESOURCE_MANAGER->AddTexture(mesh.GetTextureFileName()));
 	}
 
-	const std::string& ModelComponent::GetModelRUID() const
+	void CModel::AddModelFile(const std::string& fileName)
+	{
+		m_ModelFile = fileName;
+	}
+
+	const std::string& CModel::GetModelRUID() const
 	{
 		return m_ModelRUID;
 	}
 
-	const std::vector<std::string>& ModelComponent::GetMeshesTextureRUIDS() const
+	const std::vector<std::string>& CModel::GetMeshesTextureRUIDS() const
 	{
 		return m_MeshesTextureRUIDS;
 	}

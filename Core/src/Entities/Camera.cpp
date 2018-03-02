@@ -3,7 +3,7 @@
 
 namespace Entities {
 
-	Camera::Camera(const std::string& EUID) : Entity(EUID, EntityType::CAMERA), m_Position(vec3<float>(0.0f, 0.0f, 2.0f)), m_Front(vec3<float>(0.0f, 0.0f, -1.0f)),
+	Camera::Camera() : Entity(Managers::NextCameraEUID(), EntityType::CAMERA), m_Position(vec3<float>(0.0f, 0.0f, 2.0f)), m_Front(vec3<float>(0.0f, 0.0f, -1.0f)),
 		m_Up(vec3<float>(0.0f, 1.0f, 0.0f)), m_FOV(90.0f), m_Near(0.1f), m_Far(100.0f)
 	{
 		

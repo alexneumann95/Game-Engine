@@ -2,7 +2,7 @@
 
 #include "..\Common.h"
 #include "Vertex.h"
-#include "..\Resources\Buffers\ElementBuffer.h"
+#include "..\Resources\Buffers\RElementBuffer.h"
 
 #include <vector>
 #include <fstream>

@@ -18,7 +18,7 @@ namespace Managers {
 	bool EntityManager::Start()
 	{
 		// Create a default camera
-		SetActiveCamera(AddEntity(Camera()));
+		SetActiveCamera(AddEntity(Entities::Camera()));
 
 		return true;
 	}
@@ -45,27 +45,34 @@ namespace Managers {
 
 	void EntityManager::SetActiveCamera(const std::string& EUID)
 	{
-		if (CheckEntityExists(EUID) && m_Entities.find(EUID)->second->GetType() == EntityType::CAMERA)
+		if (CheckEntityExists(EUID) && m_Entities.find(EUID)->second->GetType() == Entities::EntityType::CAMERA)
 			m_ActiveCameraEUID = EUID;
 		else
 			LogError("Camera is not found!");
 	}
 
-	Camera* const EntityManager::GetActiveCamera() const
+	Entities::Camera* const EntityManager::GetActiveCamera() const
 	{
-		return dynamic_cast<Camera*>(m_Entities.find(m_ActiveCameraEUID)->second);
+		return dynamic_cast<Entities::Camera*>(m_Entities.find(m_ActiveCameraEUID)->second);
 	}
 
-	const std::string& EntityManager::AddEntity(const Entity& entity)
+	const std::string& EntityManager::AddEntity(const Entities::Entity& entity)
 	{
 		if (CheckEntityExists(entity.GetEUID()))
 			return m_Entities.find(entity.GetEUID())->first;
 
-		std::pair<EntitiesMap::iterator, bool> result = m_Entities.insert(std::pair<std::string, Entity*>(entity.GetEUID(), entity.Clone()));
+		std::pair<EntitiesMap::iterator, bool> result = m_Entities.insert(std::pair<std::string, Entities::Entity*>(entity.GetEUID(), entity.Clone()));
 		result.first->second->Start();
-		if (entity.GetType() == EntityType::GAME_OBJECT)
-			dynamic_cast<GameObject*>(result.first->second)->InitComponents();
+		if (entity.GetType() == Entities::EntityType::GAME_OBJECT)
+			dynamic_cast<Entities::GameObject*>(result.first->second)->InitComponents();
 		return result.first->first;
+	}
+
+	template <typename Type>
+	Type* const EntityManager::GetEntity(const std::string& EUID)
+	{
+		auto iter = m_Entities.find(EUID);
+		return (iter != m_Entities.end()) ? dynamic_cast<Type* const>(iter->second) : nullptr;
 	}
 
 	bool EntityManager::CheckEntityExists(const std::string& EUID)

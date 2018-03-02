@@ -1,14 +1,14 @@
 #pragma once
 
-#include "Buffer.h"
+#include "RBuffer.h"
 
 namespace Resources::Buffers {
 
-	class GE_API VertexBuffer final : public Buffer
+	class RVertexBuffer final : public RBuffer
 	{
 	public:
-		VertexBuffer(unsigned int bufferSize, const std::string& RUID);
-		~VertexBuffer();
+		RVertexBuffer(unsigned int bufferSize, const std::string& RUID);
+		~RVertexBuffer();
 
 		void Init() override;
 		void LoadData(unsigned int offset, unsigned int size, const void* pData) override;

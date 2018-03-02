@@ -14,7 +14,7 @@ namespace Entities {
 	class GE_API Camera : public Entity
 	{
 	public:
-		Camera(const std::string& EUID = Managers::NextCameraEUID());
+		Camera();
 
 		virtual Camera* Clone() const;
 		void Start() override { }

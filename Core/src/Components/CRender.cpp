@@ -1,19 +1,19 @@
-#include "RenderComponent.h"
+#include "CRender.h"
 #include "..\Managers\ResourceManager.h"
 #include "..\Entities\GameObject.h"
 
 namespace Components {
 
-	RenderComponent::RenderComponent(Entities::GameObject* const pGameObject) : Component(pGameObject)
+	CRender::CRender(Entities::GameObject* const pGameObject) : Component(pGameObject, ComponentType::RENDER)
 	{
 
 	}
 
-	void RenderComponent::Init()
+	void CRender::Init()
 	{
-		if (GetGameObject()->GetModelComp() != nullptr)
+		if (GetGameObject()->GetComponent<Components::CModel>() != nullptr)
 		{
-			auto pModel = RESOURCE_MANAGER->GetModel(GetGameObject()->GetModelComp()->GetModelRUID());
+			auto pModel = RESOURCE_MANAGER->GetModel(GetGameObject()->GetComponent<Components::CModel>()->GetModelRUID());
 
 			// Create vertex & index buffers
 			unsigned int vbSize = pModel->GetModelVertexByteSize();
@@ -44,12 +44,12 @@ namespace Components {
 		}
 	}
 
-	const std::string& RenderComponent::GetVertexBufferRUID() const
+	const std::string& CRender::GetVertexBufferRUID() const
 	{
 		return m_VBRUID;
 	}
 
-	const std::string& RenderComponent::GetElementBufferRUID() const
+	const std::string& CRender::GetElementBufferRUID() const
 	{
 		return m_EBRUID;
 	}
