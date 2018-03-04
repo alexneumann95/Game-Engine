@@ -11,8 +11,12 @@
 #include "src\Components\CModel.h"
 #include "src\Components\CRender.h"
 
+#include "src\Entities\EntitiesComponents.h"
+
 #include "src\Entities\GameObject.h"
 #include "src\Entities\Camera.h"
+#include "src\Entities\Lights\DirectionalLight.h"
+#include "src\Entities\Lights\PointLight.h"
 
 #include "src\Utilities\Errors.h"
 #include "src\Utilities\GameTimer.h"

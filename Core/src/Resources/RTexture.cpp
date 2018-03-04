@@ -44,8 +44,9 @@ namespace Resources {
 		glBindTexture(GL_TEXTURE_2D, m_Texture);
 	}
 
-	void RTexture::Unbind()
+	void RTexture::Unbind(GLenum textureSlot)
 	{
+		glActiveTexture(textureSlot);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }

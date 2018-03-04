@@ -9,7 +9,7 @@ namespace Components {
 	class GE_API CRender final : public Component
 	{
 	public:
-		CRender(Entities::GameObject* const pGameObject);
+		CRender(Entities::Entity* const pEntity);
 
 		void Init() override;
 

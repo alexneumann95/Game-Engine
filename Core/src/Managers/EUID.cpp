@@ -25,4 +25,13 @@ namespace Managers {
 		return id;
 	}
 
+	std::string NextPointLightEUID()
+	{
+		static int nextLightNo = 1;
+		std::string id = "Entities.Light.Point." + std::to_string(nextLightNo);
+		if (nextLightNo < MAX_NUM_POINT_LIGHTS)
+			nextLightNo += 1;
+		return id;
+	}
+
 }

@@ -3,7 +3,7 @@
 
 namespace Components {
 
-	CModel::CModel(Entities::GameObject* const pGameObject) : Component(pGameObject, ComponentType::MODEL)
+	CModel::CModel(Entities::Entity* const pEntity) : Component(pEntity, ComponentType::MODEL)
 	{
 
 	}
@@ -12,9 +12,15 @@ namespace Components {
 	{
 		m_ModelRUID = RESOURCE_MANAGER->AddModel(m_ModelFile);
 
-		// Load textures into the RM
+		// Load textures into the RM (if model has any)
+		int meshIndex = 0;
 		for (auto& mesh : RESOURCE_MANAGER->GetModel(m_ModelRUID)->GetMeshes())
-			m_MeshesTextureRUIDS.push_back(RESOURCE_MANAGER->AddTexture(mesh.GetTextureFileName()));
+		{
+			if (mesh.GetMeshTextureFileName() != "")
+				m_MeshTexturesDescs.emplace_back(meshIndex, RESOURCE_MANAGER->AddTexture(mesh.GetMeshTextureFileName()));
+
+			meshIndex += 1;
+		}
 	}
 
 	void CModel::AddModelFile(const std::string& fileName)
@@ -27,9 +33,15 @@ namespace Components {
 		return m_ModelRUID;
 	}
 
-	const std::vector<std::string>& CModel::GetMeshesTextureRUIDS() const
+	const MeshTexturesDesc* const CModel::GetMeshTexturesDesc(int meshIndex) const
 	{
-		return m_MeshesTextureRUIDS;
+		for (auto& meshTextureDesc : m_MeshTexturesDescs)
+		{
+			if (meshTextureDesc.MeshIndex == meshIndex)
+				return &meshTextureDesc;
+		}
+
+		return nullptr;
 	}
 
 }

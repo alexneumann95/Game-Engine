@@ -17,19 +17,27 @@ namespace Managers {
 
 	bool ShaderManager::Start()
 	{
-		std::vector<Graphics::ShaderDesc> descs =
+		std::vector<Graphics::ShaderDesc> modelShaderDescs =
 		{
-			{ GL_VERTEX_SHADER, "Basic.vert" },
-			{ GL_FRAGMENT_SHADER, "Basic.frag" }
+			{ GL_VERTEX_SHADER, "Model.vert" },
+			{ GL_FRAGMENT_SHADER, "Model.frag" }
 		};
-		m_pShader = new Graphics::Shader(descs);
+		m_pModelShader = new Graphics::Shader(modelShaderDescs);
+
+		std::vector<Graphics::ShaderDesc> lightShaderDescs =
+		{
+			{ GL_VERTEX_SHADER, "Light.vert" },
+			{ GL_FRAGMENT_SHADER, "Light.frag" }
+		};
+		m_pLightShader = new Graphics::Shader(lightShaderDescs);
 
 		return true;
 	}
 
 	bool ShaderManager::Stop()
 	{
-		delete m_pShader;
+		delete m_pModelShader;
+		delete m_pLightShader;
 		return true;
 	}
 
@@ -38,9 +46,14 @@ namespace Managers {
 
 	}
 
-	Graphics::Shader* const ShaderManager::GetShader() const
+	Graphics::Shader* const ShaderManager::GetShader(Graphics::ShaderType type) const
 	{
-		return m_pShader;
+		if (type == Graphics::ShaderType::MODEL)
+			return m_pModelShader;
+		else if (type == Graphics::ShaderType::LIGHT)
+			return m_pLightShader;
+
+		return nullptr;
 	}
 
 }

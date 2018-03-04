@@ -2,7 +2,7 @@
 
 namespace Components {
 
-	CTransform::CTransform(Entities::GameObject* const pGameObject) : Component(pGameObject, ComponentType::TRANSFORM)
+	CTransform::CTransform(Entities::Entity* const pEntity) : Component(pEntity, ComponentType::TRANSFORM)
 	{
 
 	}

@@ -58,8 +58,7 @@ namespace Managers {
 
 		std::pair<EntitiesMap::iterator, bool> result = m_Entities.insert(std::pair<std::string, Entities::Entity*>(entity.GetEUID(), entity.Clone()));
 		result.first->second->Start();
-		if (entity.GetType() == Entities::EntityType::GAME_OBJECT)
-			dynamic_cast<Entities::GameObject*>(result.first->second)->InitComponents();
+		result.first->second->InitComponents();
 		return result.first->first;
 	}
 

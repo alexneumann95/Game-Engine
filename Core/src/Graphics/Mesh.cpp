@@ -27,9 +27,9 @@ namespace Graphics {
 		return m_Indices;
 	}
 
-	const std::string& Mesh::GetTextureFileName() const
+	const std::string& Mesh::GetMeshTextureFileName() const
 	{
-		return m_TextureFileName;
+		return m_MeshTextureFileName;
 	}
 
 	int Mesh::GetNumVertices() const
@@ -91,11 +91,12 @@ namespace Graphics {
 					indices.push_back(index);
 				}
 			}
-			else if (identifier == "tf")
+			else if (identifier == "mtf")
 			{
-				is >> mesh.m_TextureFileName;
-				break;
+				is >> mesh.m_MeshTextureFileName;
 			}
+			else if (identifier == "end")
+				break;
 		}
 
 		if (texCoords.size() == positions.size() && positions.size() == normals.size() && normals.size() == colours.size() && indices.size() != 0)

@@ -2,6 +2,7 @@
 
 #include "Manager.h"
 #include "..\Graphics\Shader.h"
+#include "..\Graphics\ShaderType.h"
 
 namespace Managers {
 
@@ -15,10 +16,11 @@ namespace Managers {
 		bool Stop() override;
 		void Update() override;
 
-		Graphics::Shader* const GetShader() const;
+		Graphics::Shader* const GetShader(Graphics::ShaderType type) const;
 	private:
 		static ShaderManager* m_pInstance;
-		Graphics::Shader* m_pShader = nullptr;
+		Graphics::Shader* m_pModelShader = nullptr;
+		Graphics::Shader* m_pLightShader = nullptr;
 	};
 
 }

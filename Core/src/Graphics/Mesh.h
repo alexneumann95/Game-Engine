@@ -18,7 +18,7 @@ namespace Graphics {
 		const std::string& GetName() const;
 		const std::vector<Vertex>& GetVertices() const;
 		const std::vector<ELEMENT_BUFFER_DATA_TYPE>& GetIndices() const;
-		const std::string& GetTextureFileName() const;
+		const std::string& GetMeshTextureFileName() const;
 		int GetNumVertices() const;
 		int GetNumIndices() const;
 		unsigned int GetVerticesByteSize() const;
@@ -28,7 +28,7 @@ namespace Graphics {
 		std::string m_Name;
 		std::vector<Vertex> m_Vertices;
 		std::vector<ELEMENT_BUFFER_DATA_TYPE> m_Indices;
-		std::string m_TextureFileName;
+		std::string m_MeshTextureFileName;
 	};
 
 }

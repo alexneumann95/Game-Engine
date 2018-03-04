@@ -4,16 +4,16 @@
 
 namespace Components {
 
-	CRender::CRender(Entities::GameObject* const pGameObject) : Component(pGameObject, ComponentType::RENDER)
+	CRender::CRender(Entities::Entity* const pEntity) : Component(pEntity, ComponentType::RENDER)
 	{
 
 	}
 
 	void CRender::Init()
 	{
-		if (GetGameObject()->GetComponent<Components::CModel>() != nullptr)
+		if (GetEntity()->GetComponent<Components::CModel>() != nullptr)
 		{
-			auto pModel = RESOURCE_MANAGER->GetModel(GetGameObject()->GetComponent<Components::CModel>()->GetModelRUID());
+			auto pModel = RESOURCE_MANAGER->GetModel(GetEntity()->GetComponent<Components::CModel>()->GetModelRUID());
 
 			// Create vertex & index buffers
 			unsigned int vbSize = pModel->GetModelVertexByteSize();

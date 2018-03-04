@@ -1,15 +1,16 @@
 #include "Component.h"
+#include "..\Entities\GameObject.h"
 
 namespace Components {
 
-	Component::Component(Entities::GameObject* const pGameObject, ComponentType type) : m_pGameObject(pGameObject), m_Type(type)
+	Component::Component(Entities::Entity* const pEntity, ComponentType type) : m_pEntity(pEntity), m_Type(type)
 	{
 
 	}
 
-	Entities::GameObject* const Component::GetGameObject() const
+	Entities::Entity* const Component::GetEntity() const
 	{
-		return m_pGameObject;
+		return m_pEntity;
 	}
 
 	ComponentType Component::GetType() const

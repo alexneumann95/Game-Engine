@@ -3,21 +3,23 @@
 #include "..\Common.h"
 #include "ComponentType.h"
 
-namespace Entities { class GameObject; }
+namespace Entities { class Entity; class GameObject; }
 
 namespace Components {
 
 	class GE_API Component
 	{
 	public:
-		Component(Entities::GameObject* const pGameObject, ComponentType type); // The game object the component belongs to
+		Component(Entities::Entity* const pEntity, ComponentType type); // The game object the component belongs to
 
-		Entities::GameObject* const GetGameObject() const;
+		// Returns a pointer to the entity it belongs to
+		Entities::Entity* const GetEntity() const;
+
 		ComponentType GetType() const;
 
 		virtual void Init() { };
 	private:
-		Entities::GameObject* m_pGameObject;
+		Entities::Entity* m_pEntity;
 		ComponentType m_Type;
 	};
 

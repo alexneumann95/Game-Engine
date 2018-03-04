@@ -37,6 +37,7 @@ namespace Graphics {
 		unsigned int Get() const;
 
 		void SetUniform(const std::string& name, int value);
+		void SetUniform(const std::string& name, float value);
 		void SetUniform(const std::string& name, const mat3<float>& matrix);
 		void SetUniform(const std::string& name, const mat4<float>& matrix);
 		void SetUniform(const std::string& name, const vec3<float>& vector);

@@ -15,7 +15,7 @@ namespace Resources {
 		void Init() override;
 
 		void Bind(GLenum textureSlot = GL_TEXTURE0);
-		void Unbind();
+		void Unbind(GLenum textureSlot = GL_TEXTURE0);
 	private:
 		std::string m_File;
 		unsigned int m_Texture = 0;

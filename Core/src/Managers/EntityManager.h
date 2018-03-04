@@ -4,6 +4,7 @@
 #include "..\Entities\EntityType.h"
 #include "..\Entities\GameObject.h"
 #include "..\Entities\Lights\DirectionalLight.h"
+#include "..\Entities\Lights\PointLight.h"
 #include "..\Entities\Camera.h"
 
 #include <map>
@@ -52,7 +53,9 @@ namespace Managers {
 template GE_API Entities::GameObject* const Managers::EntityManager::GetEntity<Entities::GameObject>(const std::string& EUID);
 template GE_API Entities::Camera* const Managers::EntityManager::GetEntity<Entities::Camera>(const std::string& EUID);
 template GE_API Entities::Lights::DirectionalLight* const Managers::EntityManager::GetEntity<Entities::Lights::DirectionalLight>(const std::string& EUID);
+template GE_API Entities::Lights::PointLight* const Managers::EntityManager::GetEntity<Entities::Lights::PointLight>(const std::string& EUID);
 
 template GE_API const std::vector<Entities::GameObject*> Managers::EntityManager::GetEntities<Entities::GameObject>();
 template GE_API const std::vector<Entities::Camera*> Managers::EntityManager::GetEntities<Entities::Camera>();
 template GE_API const std::vector<Entities::Lights::DirectionalLight*> Managers::EntityManager::GetEntities<Entities::Lights::DirectionalLight>();
+template GE_API const std::vector<Entities::Lights::PointLight*> Managers::EntityManager::GetEntities<Entities::Lights::PointLight>();

@@ -6,7 +6,8 @@ namespace Entities {
 	{
 		GAME_OBJECT,
 		CAMERA,
-		DIRECTIONAL_LIGHT
+		DIRECTIONAL_LIGHT,
+		POINT_LIGHT
 	};
 
 }

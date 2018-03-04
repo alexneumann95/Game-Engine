@@ -21,7 +21,7 @@ namespace Components {
 	class GE_API CTransform final : public Component
 	{
 	public:
-		CTransform(Entities::GameObject* const pGameObject);
+		CTransform(Entities::Entity* const pEntity);
 
 		void Init() override;
 

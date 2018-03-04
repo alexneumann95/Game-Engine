@@ -179,6 +179,8 @@
     <ClCompile Include="src\Entities\Entity.cpp" />
     <ClCompile Include="src\Entities\GameObject.cpp" />
     <ClCompile Include="src\Entities\Lights\DirectionalLight.cpp" />
+    <ClCompile Include="src\Entities\Lights\Light.cpp" />
+    <ClCompile Include="src\Entities\Lights\PointLight.cpp" />
     <ClCompile Include="src\Graphics\Mesh.cpp" />
     <ClCompile Include="src\Graphics\Shader.cpp" />
     <ClCompile Include="src\Managers\EntityManager.cpp" />
@@ -210,12 +212,16 @@
     <ClInclude Include="src\Components\CTransform.h" />
     <ClInclude Include="src\EngineControl.h" />
     <ClInclude Include="src\Entities\Camera.h" />
+    <ClInclude Include="src\Entities\EntitiesComponents.h" />
     <ClInclude Include="src\Entities\Entity.h" />
     <ClInclude Include="src\Entities\EntityType.h" />
     <ClInclude Include="src\Entities\GameObject.h" />
     <ClInclude Include="src\Entities\Lights\DirectionalLight.h" />
+    <ClInclude Include="src\Entities\Lights\Light.h" />
+    <ClInclude Include="src\Entities\Lights\PointLight.h" />
     <ClInclude Include="src\Graphics\Mesh.h" />
     <ClInclude Include="src\Graphics\Shader.h" />
+    <ClInclude Include="src\Graphics\ShaderType.h" />
     <ClInclude Include="src\Graphics\Vertex.h" />
     <ClInclude Include="src\Managers\EntityManager.h" />
     <ClInclude Include="src\Managers\EUID.h" />
